@@ -94,6 +94,8 @@ class Cube{
         this.face5 = faces[4];
         this.down = faces[5];
         this.face6 = faces[5];
+
+        this.setFaceColors();
     }
 
     //options: UP || DOWN || LEFT || RIGHT
@@ -111,16 +113,28 @@ class Cube{
                 this.up = front;
                 this.back = up;
                 this.down = back;
-                console.log("Rotate faces up!");
+                //console.log("Rotate faces up!");
                 break;
             case "DOWN":
-                console.log("Rotate faces down!");
+                this.front = up;
+                this.up = back;
+                this.back = down;
+                this.down = front;
+                //console.log("Rotate faces down!");
                 break;
             case "LEFT":
-                console.log("Rotate faces left!");
+                this.front = right;
+                this.left = front;
+                this.back = left;
+                this.right = back;
+                //console.log("Rotate faces left!");
                 break;
             case "RIGHT":
-                console.log("Rotate faces right!");
+                this.front = left;
+                this.left = back;
+                this.back = right;
+                this.right = front;
+                //console.log("Rotate faces right!");
                 break;
         }
 
