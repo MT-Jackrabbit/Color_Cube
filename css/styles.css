@@ -9,7 +9,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    width: 100vw;
+    /* width: 100vw; */
     background-color: blanchedalmond;
 }
 
@@ -19,6 +19,22 @@ body {
     /* margin-bottom: 5px; */
     /* margin-right: 5px; */
     border: 2px solid black;
+    display: inline-block;
+}
+
+.cube{
+    display: flex;
+    flex-direction: column;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: column;
 }
 
 #one{
