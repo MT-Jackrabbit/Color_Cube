@@ -152,7 +152,7 @@ class Cube{
         $('#four').css("background-color", `${this.front[3].myColor}`);
         $('#four').text('3');
         $('#five').css("background-color", `${this.front[4].myColor}`);
-        $('#five').text('4');
+        //$('#five').text('4');
         $('#six').css("background-color", `${this.front[5].myColor}`);
         $('#six').text('5');
         $('#seven').css("background-color", `${this.front[6].myColor}`);
@@ -274,6 +274,161 @@ class Cube{
         }
     }
 
+    //whichWay: UP || DOWN
+    rotateRightFace(whichWay){
+        const color0 = this.right[0].myColor;
+        const color1 = this.right[1].myColor;
+        const color2 = this.right[2].myColor;
+        const color3 = this.right[3].myColor;
+        const color5 = this.right[5].myColor;
+        const color6 = this.right[6].myColor;
+        const color7 = this.right[7].myColor;
+        const color8 = this.right[8].myColor;
+
+        //console.log(currFace);
+
+        switch(whichWay.toUpperCase())
+        {
+            case "UP":
+                this.right[0].myColor = color6;
+                this.right[1].myColor = color3;
+                this.right[2].myColor = color0;
+                this.right[3].myColor = color7;
+                this.right[5].myColor = color1;
+                this.right[6].myColor = color8;
+                this.right[7].myColor = color5;
+                this.right[8].myColor = color2;
+                break;
+            case "DOWN":
+                this.right[0].myColor = color2;
+                this.right[1].myColor = color5;
+                this.right[2].myColor = color8;
+                this.right[3].myColor = color1;
+                this.right[5].myColor = color7;
+                this.right[6].myColor = color0;
+                this.right[7].myColor = color3;
+                this.right[8].myColor = color6;
+                break;
+        }
+    }
+
+    //whichWay: UP || DOWN
+    rotateLeftFace(whichWay){
+        const color0 = this.left[0].myColor;
+        const color1 = this.left[1].myColor;
+        const color2 = this.left[2].myColor;
+        const color3 = this.left[3].myColor;
+        const color5 = this.left[5].myColor;
+        const color6 = this.left[6].myColor;
+        const color7 = this.left[7].myColor;
+        const color8 = this.left[8].myColor;
+
+        //console.log(currFace);
+
+        switch(whichWay.toUpperCase())
+        {
+            case "DOWN":
+                this.left[0].myColor = color6;
+                this.left[1].myColor = color3;
+                this.left[2].myColor = color0;
+                this.left[3].myColor = color7;
+                this.left[5].myColor = color1;
+                this.left[6].myColor = color8;
+                this.left[7].myColor = color5;
+                this.left[8].myColor = color2;
+                break;
+            case "UP":
+                this.left[0].myColor = color2;
+                this.left[1].myColor = color5;
+                this.left[2].myColor = color8;
+                this.left[3].myColor = color1;
+                this.left[5].myColor = color7;
+                this.left[6].myColor = color0;
+                this.left[7].myColor = color3;
+                this.left[8].myColor = color6;
+                break;
+        }
+    }
+
+    //whichWay: LEFT || RIGHT
+    rotateFrontFace(whichWay){
+        const color0 = this.front[0].myColor;
+        const color1 = this.front[1].myColor;
+        const color2 = this.front[2].myColor;
+        const color3 = this.front[3].myColor;
+        const color5 = this.front[5].myColor;
+        const color6 = this.front[6].myColor;
+        const color7 = this.front[7].myColor;
+        const color8 = this.front[8].myColor;
+        const leftColors = [this.left[2].myColor, this.left[5].myColor, this.left[8].myColor];
+        const upColors = [this.up[6].myColor, this.up[7].myColor, this.up[8].myColor];
+        const rightColors = [this.right[0].myColor, this.right[3].myColor, this.right[6].myColor];
+        const downColors = [this.down[0].myColor, this.down[1].myColor, this.down[2].myColor];
+
+        //console.log(currFace);
+
+        switch(whichWay.toUpperCase())
+        {
+            case "RIGHT":
+                //change front face
+                this.front[0].myColor = color6;
+                this.front[1].myColor = color3;
+                this.front[2].myColor = color0;
+                this.front[3].myColor = color7;
+                this.front[5].myColor = color1;
+                this.front[6].myColor = color8;
+                this.front[7].myColor = color5;
+                this.front[8].myColor = color2;
+                //change left face
+                this.left[2].myColor = downColors[0];
+                this.left[5].myColor = downColors[1];
+                this.left[8].myColor = downColors[2];
+                //change up face
+                this.up[6].myColor = leftColors[0];
+                this.up[7].myColor = leftColors[1];
+                this.up[8].myColor = leftColors[2];
+                //change right face
+                this.right[0].myColor = upColors[0];
+                this.right[3].myColor = upColors[1];
+                this.right[6].myColor = upColors[2];
+                //change down face
+                this.down[0].myColor = rightColors[0];
+                this.down[1].myColor = rightColors[1];
+                this.down[2].myColor = rightColors[2];
+                break;
+            case "LEFT":
+                //change front face
+                this.front[0].myColor = color2;
+                this.front[1].myColor = color5;
+                this.front[2].myColor = color8;
+                this.front[3].myColor = color1;
+                this.front[5].myColor = color7;
+                this.front[6].myColor = color0;
+                this.front[7].myColor = color3;
+                this.front[8].myColor = color6;
+                //change left face
+                this.left[2].myColor = upColors[0];
+                this.left[5].myColor = upColors[1];
+                this.left[8].myColor = upColors[2];
+                //change up face
+                this.up[6].myColor = rightColors[0];
+                this.up[7].myColor = rightColors[1];
+                this.up[8].myColor = rightColors[2];
+                //change right face
+                this.right[0].myColor = downColors[0];
+                this.right[3].myColor = downColors[1];
+                this.right[6].myColor = downColors[2];
+                //change down face
+                this.down[0].myColor = leftColors[0];
+                this.down[1].myColor = leftColors[1];
+                this.down[2].myColor = leftColors[2];
+                break;
+        }
+
+        this.setFaceColors();
+        this.setSmallSquareColors();
+    }
+
     //options:
     // whichRow: TOP || BOTTOM
     // whichDirection: LEFT || RIGHT
@@ -355,6 +510,8 @@ class Cube{
                 this.setColBack("LEFT", up);
                 this.setColDown("LEFT", back);
                 this.setColUp("LEFT", front);
+
+                this.rotateLeftFace("UP");
             }
             else if(whichDirection.toUpperCase() === "DOWN")
             {
@@ -362,6 +519,8 @@ class Cube{
                 this.setColBack("LEFT", down);
                 this.setColDown("LEFT", front);
                 this.setColUp("LEFT", back);
+
+                this.rotateLeftFace("DOWN");
             }
             
         }
@@ -378,6 +537,8 @@ class Cube{
                 this.setColBack("RIGHT", up);
                 this.setColDown("RIGHT", back);
                 this.setColUp("RIGHT", front);
+
+                this.rotateRightFace("UP");
             }
             else if(whichDirection.toUpperCase() === "DOWN")
             {
@@ -385,6 +546,8 @@ class Cube{
                 this.setColBack("RIGHT", down);
                 this.setColDown("RIGHT", front);
                 this.setColUp("RIGHT", back);
+
+                this.rotateRightFace("DOWN");
             }
         }
 
@@ -647,4 +810,12 @@ $('.right-column-up').click(function(event){
 
 $('.right-column-down').click(function(event){
     gameCube.switchColumns("RIGHT", "DOWN");
+});
+
+$('.rotate-front-right').click(function(event){
+    gameCube.rotateFrontFace("RIGHT");
+});
+
+$('.rotate-front-left').click(function(event){
+    gameCube.rotateFrontFace("LEFT");
 });

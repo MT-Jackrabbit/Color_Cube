@@ -74,9 +74,18 @@ button {
     margin: 0 3px;
 }
 
+.gg-undo, .gg-redo {
+    margin: 0 3px;
+}
+
 .gg-arrow-down-o:hover, .gg-arrow-up-o:hover, .gg-arrow-right-o:hover, .gg-arrow-left-o:hover {
     cursor: pointer;
     background-color: turquoise;
+}
+
+.gg-undo:hover, .gg-redo:hover {
+    cursor: pointer;
+    background-color: white;
 }
 
 
@@ -159,6 +168,13 @@ button {
 
 .orange {
     background-color: orange;
+}
+
+#five {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 
