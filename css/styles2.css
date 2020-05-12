@@ -1,0 +1,178 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: tan;
+}
+
+h1 {
+    padding: 0;
+    margin: 0;
+}
+
+section {
+    border: 2px solid red;
+}
+  
+.help-align {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.outside-container {
+    display: flex;
+    align-items: center;
+    border: 2px solid pink;
+}
+
+.container {
+    display: flex;
+    /* border: 2px solid blue; */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 237px;
+}
+  
+.col {
+    flex-direction: column;
+  }
+  
+.box {
+    width: 75px;
+    height: 75px;
+    background-color: green;
+    border: 2px solid black;
+}
+
+.cube-left {
+    text-align: center;
+}
+
+.cube-right {
+    text-align: center;
+}
+
+.cube-top {
+    display: flex;
+}
+
+.cube-top p {
+    margin: 0 5px;
+}
+
+.cube-bottom {
+    display: flex;
+}
+
+.cube-bottom p {
+    margin: 0 5px;
+}
+
+.small-cubes {
+    display: flex;
+    flex-direction: column;
+    background-color: orchid;
+    width: 210px;
+    text-align: center;
+}
+
+.center-cubes {
+    display: flex;
+}
+
+.new {
+    display: flex;
+    /* border: 2px solid blue; */
+    /* flex-direction: row; */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 1px solid purple;
+    height: 51px;
+    width: 51.5px;
+}
+
+.small-box {
+    height: 16.5px;
+    width: 16.5px;
+    border: 1px solid black;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.green {
+    background-color: green;
+}
+
+.white {
+    background-color: white;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.orange {
+    background-color: orange;
+}
+
+
+
+/* .small-box {
+    width: 40px;
+    height: 40px;
+    background-color: green;
+    border: 1px solid black;
+}
+
+.small-four {
+    display: flex;
+
+}
+
+aside {
+    background-color: black;
+    position: absolute;
+    left: 20px;
+    top: 250px;
+}
+
+#one {
+    background-color: white;
+}
+
+#two {
+    background-color: red;
+}
+
+#three {
+    background-color: green;
+}
+
+#four {
+    background-color: orange;
+}
+
+#five {
+    background-color: blue;
+}
+
+#six {
+    background-color: yellow;
+} */

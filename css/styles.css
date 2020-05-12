@@ -9,8 +9,26 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    /* flex-direction: column; */
     /* width: 100vw; */
     background-color: blanchedalmond;
+}
+.trial {
+    position: absolute;
+    left: 0;
+    bottom: 150px;
+    background-color: crimson;
+}
+
+.small-square {
+    /* display: flex; */
+    /* align-items: center;
+    justify-content: center;
+    flex-direction: row; */
+    /* flex-wrap: wrap; */
+    width: 5px;
+    height: 5px;
+    background-color: cyan;
 }
 
 .section__square {
