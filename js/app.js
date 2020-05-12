@@ -144,11 +144,11 @@ class Cube{
     //sets the main cube colors to the user
     setFaceColors(){
         $('#one').css("background-color", `${this.front[0].myColor}`);
-        $('#one').text('0');
+        // $('#one').text('0');
         $('#two').css("background-color", `${this.front[1].myColor}`);
         $('#two').text('1');
         $('#three').css("background-color", `${this.front[2].myColor}`);
-        $('#three').text('2');
+        //$('#three').text('2');
         $('#four').css("background-color", `${this.front[3].myColor}`);
         $('#four').text('3');
         $('#five').css("background-color", `${this.front[4].myColor}`);
@@ -156,11 +156,11 @@ class Cube{
         $('#six').css("background-color", `${this.front[5].myColor}`);
         $('#six').text('5');
         $('#seven').css("background-color", `${this.front[6].myColor}`);
-        $('#seven').text('6');
+        //$('#seven').text('6');
         $('#eight').css("background-color", `${this.front[7].myColor}`);
         $('#eight').text('7');
         $('#nine').css("background-color", `${this.front[8].myColor}`);
-        $('#nine').text('8');
+        //$('#nine').text('8');
     }
 
     //options:

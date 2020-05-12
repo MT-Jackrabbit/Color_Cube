@@ -3,64 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>COLOR Cube Style</title>
+    <!-- <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link href='https://css.gg/css' rel='stylesheet'>
     <link rel="stylesheet" href="css/styles2.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" defer></script>
+    <script src="js/app.js" defer></script>
 </head>
 <body>
     <section class="help-align">
         <div class="cube-top">
-            <p>left</p>
-            <p>right</p>
+            <i class="gg-arrow-left-o face-left"></i>
+            <i class="gg-arrow-right-o face-right"></i>
         </div>
         <div class="outside-container">
             <div class="cube-left">
-                <p>top</p>
-                <p>bottom</p>
+                <i class="gg-arrow-up-o face-up"></i>
+                <i class="gg-arrow-down-o face-down"></i>
             </div>
-            <div class="container">
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
+            <div class="cube">
+                <div class="cube-square" id="one">
+                    <button class="top-row-left">left</button>
+                    <button class="left-column-up">up</button>
+                </div>
+                <div class="cube-square" id="two"></div>
+                <div class="cube-square" id="three">
+                    <button class="top-row-right">right</button>
+                    <button class="right-column-up">up</button>
+                </div>
+                <div class="cube-square" id="four"></div>
+                <div class="cube-square" id="five"></div>
+                <div class="cube-square" id="six"></div>
+                <div class="cube-square" id="seven">
+                    <button class="bottom-row-left">left</button>
+                    <button class="left-column-down">down</button>
+                </div>
+                <div class="cube-square" id="eight"></div>
+                <div class="cube-square" id="nine">
+                    <button class="bottom-row-right">right</button>
+                    <button class="right-column-down">down</button>
+                </div>
             </div>
             <div class="cube-right">
-                <p>top</p>
-                <p>bottom</p>
+                <i class="gg-arrow-up-o face-up"></i>
+                <i class="gg-arrow-down-o face-down"></i>
             </div>
         </div>
         <div class="cube-bottom">
-            <p>left</p>
-            <p>right</p>
+            <i class="gg-arrow-left-o face-left"></i>
+            <i class="gg-arrow-right-o face-right"></i>
         </div>
-        <!-- <aside>
-            <div class="small-one">
-                <div class="small-box" id="one">
-                    <div class="tiny-box"></div>
-                    <div class="tiny-box"></div>
-                    <div class="tiny-box"></div>
-                    <div class="tiny-box"></div>
-                    <div class="tiny-box"></div>
-                    <div class="tiny-box"></div>
-                    <div class="tiny-box"></div>
-                    <div class="tiny-box"></div>
-                    <div class="tiny-box"></div>
-                </div>
-            </div>
-            <div class="small-four">
-                <div class="small-box" id="two"></div>
-                <div class="small-box" id="three"></div>
-                <div class="small-box" id="four"></div>
-                <div class="small-box" id="five"></div>
-            </div>
-            <div>
-                <div class="small-box" id="six"></div>
-            </div>
-        </aside> -->
     </section>
     <section class="small-cubes">
         <article class="center-cubes">
