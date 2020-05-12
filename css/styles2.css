@@ -18,7 +18,7 @@ h1 {
 }
 
 section {
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
 button {
@@ -76,6 +76,7 @@ button {
 
 .gg-arrow-down-o:hover, .gg-arrow-up-o:hover, .gg-arrow-right-o:hover, .gg-arrow-left-o:hover {
     cursor: pointer;
+    background-color: turquoise;
 }
 
 
@@ -102,7 +103,8 @@ button {
 .small-cubes {
     display: flex;
     flex-direction: column;
-    background-color: orchid;
+    margin-top: 35px;
+    /* background-color: black; */
     width: 210px;
     text-align: center;
 }
@@ -118,7 +120,7 @@ button {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    border: 1px solid purple;
+    /* border: 1px solid purple; */
     height: 51px;
     width: 51.5px;
 }
