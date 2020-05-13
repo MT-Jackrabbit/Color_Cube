@@ -144,23 +144,14 @@ class Cube{
     //updates the main cube colors to the user
     setFaceColors(){
         $('#one').css("background-color", `${this.front[0].myColor}`);
-        // $('#one').text('0');
         $('#two').css("background-color", `${this.front[1].myColor}`);
-        $('#two').text('1');
         $('#three').css("background-color", `${this.front[2].myColor}`);
-        //$('#three').text('2');
         $('#four').css("background-color", `${this.front[3].myColor}`);
-        $('#four').text('3');
         $('#five').css("background-color", `${this.front[4].myColor}`);
-        //$('#five').text('4');
         $('#six').css("background-color", `${this.front[5].myColor}`);
-        $('#six').text('5');
         $('#seven').css("background-color", `${this.front[6].myColor}`);
-        //$('#seven').text('6');
         $('#eight').css("background-color", `${this.front[7].myColor}`);
-        $('#eight').text('7');
         $('#nine').css("background-color", `${this.front[8].myColor}`);
-        //$('#nine').text('8');
 
         this.setSmallSquareColors();
     }
@@ -554,7 +545,7 @@ class Cube{
         this.setFaceColors();
     }
 
-    //which = RIGHT || LEFT
+    //which = LEFT || RIGHT
     //colors = 3 element array
     setColFront(which, colors){
         let start = 0;
@@ -579,7 +570,7 @@ class Cube{
         }
     }
 
-    //which = RIGHT || LEFT
+    //which = LEFT || RIGHT
     //colors = 3 element array
     setColBack(which, colors){
         let start = 0;
@@ -604,7 +595,7 @@ class Cube{
         }
     }
 
-    //which = RIGHT || LEFT
+    //which = LEFT || RIGHT
     //colors = 3 element array
     setColUp(which, colors){
         let start = 0;
@@ -629,7 +620,7 @@ class Cube{
         }
     }
 
-    //which = RIGHT || LEFT
+    //which = LEFT || RIGHT
     //colors = 3 element array
     setColDown(which, colors){
         let start = 0;
@@ -780,35 +771,35 @@ $('.face-down').click(function(event){
     gameCube.switchFaces("DOWN");
 });
 
-$('.top-row-right').click(function(event){
+$('.button__top-row-right').click(function(event){
     gameCube.switchRows("TOP", "RIGHT");
 });
 
-$('.top-row-left').click(function(event){
+$('.button__top-row-left').click(function(event){
     gameCube.switchRows("TOP", "LEFT");
 });
 
-$('.bottom-row-right').click(function(event){
+$('.button__bottom-row-right').click(function(event){
     gameCube.switchRows("BOTTOM", "RIGHT");
 });
 
-$('.bottom-row-left').click(function(event){
+$('.button__bottom-row-left').click(function(event){
     gameCube.switchRows("BOTTOM", "LEFT");
 });
 
-$('.left-column-up').click(function(event){
+$('.button__left-column-up').click(function(event){
     gameCube.switchColumns("LEFT", "UP");
 });
 
-$('.left-column-down').click(function(event){
+$('.button__left-column-down').click(function(event){
     gameCube.switchColumns("LEFT", "DOWN");
 });
 
-$('.right-column-up').click(function(event){
+$('.button__right-column-up').click(function(event){
     gameCube.switchColumns("RIGHT", "UP");
 });
 
-$('.right-column-down').click(function(event){
+$('.button__right-column-down').click(function(event){
     gameCube.switchColumns("RIGHT", "DOWN");
 });
 

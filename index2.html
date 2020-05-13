@@ -10,10 +10,18 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link href='https://css.gg/css' rel='stylesheet'>
     <link rel="stylesheet" href="css/styles2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" defer></script>
     <script src="js/app.js" defer></script>
 </head>
 <body>
+    <header>
+        <h1>COLOR Cube Game</h1>
+        <section class="header__section">
+            <button>Reset</button>
+            <button>Click ME</button>
+        </section>
+    </header>
     <section class="help-align">
         <div class="cube-top">
             <i class="gg-arrow-left-o face-left"></i>
@@ -26,13 +34,13 @@
             </div>
             <div class="cube">
                 <div class="cube-square" id="one">
-                    <button class="top-row-left">left</button>
-                    <button class="left-column-up">up</button>
+                    <button class="button__top-row-left button__row"></button>
+                    <button class="button__left-column-up button__column"></button>
                 </div>
                 <div class="cube-square" id="two"></div>
                 <div class="cube-square" id="three">
-                    <button class="top-row-right">right</button>
-                    <button class="right-column-up">up</button>
+                    <button class="button__right-column-up button__column"></button>
+                    <button class="button__top-row-right button__row"></button>
                 </div>
                 <div class="cube-square" id="four"></div>
                 <div class="cube-square" id="five">
@@ -41,13 +49,13 @@
                 </div>
                 <div class="cube-square" id="six"></div>
                 <div class="cube-square" id="seven">
-                    <button class="bottom-row-left">left</button>
-                    <button class="left-column-down">down</button>
+                    <button class="button__bottom-row-left button__row"></button>
+                    <button class="button__left-column-down button__column"></button>
                 </div>
                 <div class="cube-square" id="eight"></div>
                 <div class="cube-square" id="nine">
-                    <button class="bottom-row-right">right</button>
-                    <button class="right-column-down">down</button>
+                    <button class="button__right-column-down button__column"></button>
+                    <button class="button__bottom-row-right button__row"></button>
                 </div>
             </div>
             <div class="cube-right">
