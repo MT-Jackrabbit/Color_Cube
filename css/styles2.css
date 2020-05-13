@@ -21,7 +21,8 @@ header {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 125px;
+    height: 150px;
+    /* background-image: linear-gradient(to right, red, blue, green, yellow); */
     background-color: #A6B1E1;
 }
 
@@ -54,18 +55,15 @@ header {
 
 .header__section button {
     border: none;
-    border-radius: 50%;
-    width: 70px;
-    height: 35px;
+    border-radius: 3%;
+    width: 65px;
+    height: 65px;
     margin: 0 5px;
-    background-color: #424874;
-    color: white;
-    font-size: 16px;
-}
-
-button {
-    background-color: white;
-    cursor: pointer;
+    margin-bottom: 15px;
+    background-image: linear-gradient(to right, orange, yellow, green);
+    color: black;
+    font-size: 12px;
+    font-weight: 800;
 }
 
 .cube button {
@@ -77,28 +75,28 @@ button {
     transition-duration: 0.4s;
 }
 
-.button__top-row-left {
+.button__one-left {
     height: 56px;
     width: 10px;
     left: 1px;
     top: 13px;
 }
 
-.button__top-row-right {
+.button__three-right {
     height: 56px;
     width: 10px;
     right: 1px;
     top: 13px;
 }
 
-.button__bottom-row-right {
+.button__nine-right {
     height: 56px;
     width: 10px;
     right: 1px;
     bottom: 13px;
 }
 
-.button__bottom-row-left {
+.button__seven-left {
     height: 56px;
     width: 10px;
     left: 1px;
@@ -114,28 +112,28 @@ button {
     z-index: 2;
 }
 
-.button__left-column-up{
+.button__one-top {
     height: 10px;
     width: 56px;
     left: 13px;
     top: 1px;
 }
 
-.button__right-column-up {
+.button__three-top {
     height: 10px;
     width: 56px;
     right: 13px;
     top: 1px;
 }
 
-.button__right-column-down {
+.button__nine-bottom {
     height: 10px;
     width: 56px;
     right: 13px;
     bottom: 1px;
 }
 
-.button__left-column-down {
+.button__seven-bottom {
     height: 10px;
     width: 56px;
     left: 13px;
@@ -173,6 +171,7 @@ button {
     background-color: black;
     border-radius: 3%;
     margin: 5px;
+    transition-duration: .6s;
 }
   
 .col {
@@ -185,6 +184,7 @@ button {
     background-color: green;
     border: 2px solid black;
     border-radius: 10%;
+    transition-duration: .3s;
 }
 
 .cube-left {
@@ -250,13 +250,14 @@ button {
     margin-top: 35px;
     width: 210px;
     text-align: center;
+    line-height: 16.5px;
 }
 
 .center-cubes {
     display: flex;
 }
 
-.new {
+.div__small-cubes {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -270,12 +271,6 @@ button {
     width: 16.5px;
     border: 1px solid black;
 }
-
-.fas, .fab {
-    margin: 10px;
-    padding: 10px;
-}
-
 
 .red {
     background-color: red;

@@ -57,6 +57,8 @@ class Cube{
         this.right; //this variable will hold a copy of one of face1-6
         this.up; //this variable will hold a copy of one of face1-6
         this.down; //this variable will hold a copy of one of face1-6
+        this.cubeRotation = 0; //this keeps track of the degrees the face has rotated
+        this.faceRotationCount =0; //this keeps track of the number of front face rotations
 
         this.fillCube();
 
@@ -386,6 +388,8 @@ class Cube{
                 this.down[0].myColor = rightColors[0];
                 this.down[1].myColor = rightColors[1];
                 this.down[2].myColor = rightColors[2];
+                this.cubeRotation += 90;
+                this.faceRotationCount++;
                 break;
             case "LEFT":
                 //change front face
@@ -413,11 +417,151 @@ class Cube{
                 this.down[0].myColor = leftColors[0];
                 this.down[1].myColor = leftColors[1];
                 this.down[2].myColor = leftColors[2];
+                this.cubeRotation -= 90;
+                this.faceRotationCount--;
                 break;
         }
 
-        this.setFaceColors();
+        const rotate = `rotate(${this.cubeRotation}deg)`;
+        $('.cube').css("transform", rotate);
+        this.updateFaceButtons();
+        //this.setFaceColors();
         this.setSmallSquareColors();
+    }
+
+    //whichWay: LEFT || RIGHT
+    rotateBackFace(whichWay){
+        const color0 = this.back[0].myColor;
+        const color1 = this.back[1].myColor;
+        const color2 = this.back[2].myColor;
+        const color3 = this.back[3].myColor;
+        const color5 = this.back[5].myColor;
+        const color6 = this.back[6].myColor;
+        const color7 = this.back[7].myColor;
+        const color8 = this.back[8].myColor;
+        const leftColors = [this.left[0].myColor, this.left[3].myColor, this.left[6].myColor];
+        const upColors = [this.up[0].myColor, this.up[1].myColor, this.up[2].myColor];
+        const rightColors = [this.right[2].myColor, this.right[5].myColor, this.right[8].myColor];
+        const downColors = [this.down[6].myColor, this.down[7].myColor, this.down[8].myColor];
+
+        switch(whichWay.toUpperCase())
+        {
+            case "RIGHT":
+                //change front face
+                this.back[0].myColor = color6;
+                this.back[1].myColor = color3;
+                this.back[2].myColor = color0;
+                this.back[3].myColor = color7;
+                this.back[5].myColor = color1;
+                this.back[6].myColor = color8;
+                this.back[7].myColor = color5;
+                this.back[8].myColor = color2;
+                //change left face
+                this.left[0].myColor = downColors[0];
+                this.left[3].myColor = downColors[1];
+                this.left[6].myColor = downColors[2];
+                //change up face
+                this.up[0].myColor = leftColors[0];
+                this.up[1].myColor = leftColors[1];
+                this.up[2].myColor = leftColors[2];
+                //change right face
+                this.right[2].myColor = upColors[0];
+                this.right[5].myColor = upColors[1];
+                this.right[8].myColor = upColors[2];
+                //change down face
+                this.down[6].myColor = rightColors[0];
+                this.down[7].myColor = rightColors[1];
+                this.down[8].myColor = rightColors[2];
+                break;
+            case "LEFT":
+                //change front face
+                this.back[0].myColor = color2;
+                this.back[1].myColor = color5;
+                this.back[2].myColor = color8;
+                this.back[3].myColor = color1;
+                this.back[5].myColor = color7;
+                this.back[6].myColor = color0;
+                this.back[7].myColor = color3;
+                this.back[8].myColor = color6;
+                //change left face
+                this.left[0].myColor = upColors[0];
+                this.left[3].myColor = upColors[1];
+                this.left[6].myColor = upColors[2];
+                //change up face
+                this.up[0].myColor = rightColors[0];
+                this.up[1].myColor = rightColors[1];
+                this.up[2].myColor = rightColors[2];
+                //change right face
+                this.right[2].myColor = downColors[0];
+                this.right[5].myColor = downColors[1];
+                this.right[8].myColor = downColors[2];
+                //change down face
+                this.down[6].myColor = leftColors[0];
+                this.down[7].myColor = leftColors[1];
+                this.down[8].myColor = leftColors[2];
+                break;
+        }
+
+        //this.setFaceColors();
+        this.setSmallSquareColors();
+    }
+
+    //this makes sure the control buttons on the front face stay in the correct location
+    updateFaceButtons()
+    {
+        const rotationCount = this.faceRotationCount%4;
+
+        const $cubeButtons = $('.cube button');
+        const $squares = $('.cube div');
+
+        if(rotationCount === 0)
+        { //cube #1 is top left
+                $squares.eq(0).attr("id", "one");
+                $squares.eq(1).attr("id", "two");
+                $squares.eq(2).attr("id", "three");
+                $squares.eq(3).attr("id", "four");
+                $squares.eq(5).attr("id", "six");
+                $squares.eq(6).attr("id", "seven");
+                $squares.eq(7).attr("id", "eight");
+                $squares.eq(8).attr("id", "nine");
+                console.log("Cube #1 is top left!");
+        }
+        else if(rotationCount === 1 || rotationCount === -3)
+        { //cube #7 is top left
+                $squares.eq(0).attr("id", "three");
+                $squares.eq(1).attr("id", "six");
+                $squares.eq(2).attr("id", "nine");
+                $squares.eq(3).attr("id", "two");
+                $squares.eq(5).attr("id", "eight");
+                $squares.eq(6).attr("id", "one");
+                $squares.eq(7).attr("id", "four");
+                $squares.eq(8).attr("id", "seven");
+                console.log("Cube #7 is top left!");
+        }
+        else if(rotationCount === 2 || rotationCount === -2)
+        { //cube #9 is top left
+                $squares.eq(0).attr("id", "nine");
+                $squares.eq(1).attr("id", "eight");
+                $squares.eq(2).attr("id", "seven");
+                $squares.eq(3).attr("id", "six");
+                $squares.eq(5).attr("id", "four");
+                $squares.eq(6).attr("id", "three");
+                $squares.eq(7).attr("id", "two");
+                $squares.eq(8).attr("id", "one");
+                console.log("Cube #9 is top left!");
+        }
+        else if(rotationCount === 3 || rotationCount === -1)
+        { //cube #3 is top left
+                $squares.eq(0).attr("id", "seven");
+                $squares.eq(1).attr("id", "four");
+                $squares.eq(2).attr("id", "one");
+                $squares.eq(3).attr("id", "eight");
+                $squares.eq(5).attr("id", "two");
+                $squares.eq(6).attr("id", "nine");
+                $squares.eq(7).attr("id", "six");
+                $squares.eq(8).attr("id", "three");
+                console.log("Cube #3 is top left!");
+        }
     }
 
     //options:
@@ -770,36 +914,166 @@ $('.face-down').click(function(event){
     gameCube.switchFaces("DOWN");
 });
 
-$('.button__top-row-right').click(function(event){
-    gameCube.switchRows("TOP", "RIGHT");
+$('.button__three-right').click(function(event){
+    const parentId = $('.button__three-right').parent().attr("id");
+    //console.log(parentId);
+    switch(parentId)
+    {
+        case "one":
+            gameCube.switchColumns("LEFT", "UP");
+            break;
+        case "three":
+            gameCube.switchRows("TOP", "RIGHT");
+            break;
+        case "seven":
+            gameCube.switchRows("BOTTOM", "LEFT");
+            break;
+        case "nine":
+            gameCube.switchColumns("RIGHT", "DOWN");
+            break;
+    }
 });
 
-$('.button__top-row-left').click(function(event){
-    gameCube.switchRows("TOP", "LEFT");
+$('.button__one-left').click(function(event){
+    const parentId = $('.button__one-left').parent().attr("id");
+    //console.log(parentId);
+    switch(parentId)
+    {
+        case "one":
+            gameCube.switchRows("TOP", "LEFT");
+            break;
+        case "three":
+            gameCube.switchColumns("RIGHT", "UP");
+            break;
+        case "seven":
+            gameCube.switchColumns("LEFT", "DOWN");
+            break;
+        case "nine":
+            gameCube.switchRows("BOTTOM", "RIGHT");
+            break;
+    }
 });
 
-$('.button__bottom-row-right').click(function(event){
-    gameCube.switchRows("BOTTOM", "RIGHT");
+$('.button__nine-right').click(function(event){
+    const parentId = $('.button__nine-right').parent().attr("id");
+    //console.log(parentId);
+    switch(parentId)
+    {
+        case "one":
+            gameCube.switchRows("TOP", "LEFT");
+            break;
+        case "three":
+            gameCube.switchColumns("RIGHT", "UP");
+            break;
+        case "seven":
+            gameCube.switchColumns("LEFT", "DOWN");
+            break;
+        case "nine":
+            gameCube.switchRows("BOTTOM", "RIGHT");
+            break;
+    }
 });
 
-$('.button__bottom-row-left').click(function(event){
-    gameCube.switchRows("BOTTOM", "LEFT");
+$('.button__seven-left').click(function(event){
+    const parentId = $('.button__seven-left').parent().attr("id");
+    //console.log(parentId);
+    switch(parentId)
+    {
+        case "one":
+            gameCube.switchColumns("LEFT", "UP");
+            break;
+        case "three":
+            gameCube.switchRows("TOP", "RIGHT");
+            break;
+        case "seven":
+            gameCube.switchRows("BOTTOM", "LEFT");
+            break;
+        case "nine":
+            gameCube.switchColumns("RIGHT", "DOWN");
+            break;
+    }
 });
 
-$('.button__left-column-up').click(function(event){
-    gameCube.switchColumns("LEFT", "UP");
+$('.button__one-top').click(function(event){
+    const parentId = $('.button__one-top').parent().attr("id");
+    //console.log(parentId);
+    switch(parentId)
+    {
+        case "one":
+            gameCube.switchColumns("LEFT", "UP");
+            break;
+        case "three":
+            gameCube.switchRows("TOP", "RIGHT");
+            break;
+        case "seven":
+            gameCube.switchRows("BOTTOM", "LEFT");
+            break;
+        case "nine":
+            gameCube.switchColumns("RIGHT", "DOWN");
+            break;
+    }
+    
 });
 
-$('.button__left-column-down').click(function(event){
-    gameCube.switchColumns("LEFT", "DOWN");
+$('.button__seven-bottom').click(function(event){
+    const parentId = $('.button__seven-bottom').parent().attr("id");
+    //console.log(parentId);
+    switch(parentId)
+    {
+        case "one":
+            gameCube.switchRows("TOP", "LEFT");
+            break;
+        case "three":
+            gameCube.switchColumns("RIGHT", "UP");
+            break;
+        case "seven":
+            gameCube.switchColumns("LEFT", "DOWN");
+            break;
+        case "nine":
+            gameCube.switchRows("BOTTOM", "RIGHT");
+            break;
+    }
 });
 
-$('.button__right-column-up').click(function(event){
-    gameCube.switchColumns("RIGHT", "UP");
+$('.button__three-top').click(function(event){
+    const parentId = $('.button__three-top').parent().attr("id");
+    //console.log(parentId);
+    switch(parentId)
+    {
+        case "one":
+            gameCube.switchRows("TOP", "LEFT");
+            break;
+        case "three":
+            gameCube.switchColumns("RIGHT", "UP");
+            break;
+        case "seven":
+            gameCube.switchColumns("LEFT", "DOWN");
+            break;
+        case "nine":
+            gameCube.switchRows("BOTTOM", "RIGHT");
+            break;
+    }
 });
 
-$('.button__right-column-down').click(function(event){
-    gameCube.switchColumns("RIGHT", "DOWN");
+$('.button__nine-bottom').click(function(event){
+    const parentId = $('.button__nine-bottom').parent().attr("id");
+    //console.log(parentId);
+    switch(parentId)
+    {
+        case "one":
+            gameCube.switchColumns("LEFT", "UP");
+            break;
+        case "three":
+            gameCube.switchRows("TOP", "RIGHT");
+            break;
+        case "seven":
+            gameCube.switchRows("BOTTOM", "LEFT");
+            break;
+        case "nine":
+            gameCube.switchColumns("RIGHT", "DOWN");    
+            break;
+    }
+    
 });
 
 $('.rotate-front-right').click(function(event){
@@ -810,7 +1084,6 @@ $('.rotate-front-left').click(function(event){
     gameCube.rotateFrontFace("LEFT");
 });
 
-
 //capture the keystrokes and see if they are the arrow keys, b key or alt key
 document.onkeydown = checkKey;
 let keyBuffer = [];
@@ -818,7 +1091,8 @@ let keyBuffer = [];
 function checkKey(e) {
 
     let keyStroke = e.keyCode;
-    console.log(keyStroke);
+    let rotateBack = false;
+    //console.log(keyStroke);
     keyBuffer.push(keyStroke);
 
     if(keyStroke === 66 && keyBuffer[keyBuffer.length-2] === 18)
@@ -848,12 +1122,17 @@ function checkKey(e) {
             whichWay = "DOWN";
             break;
         case 66: //the b key
-            console.log("Spin the back face.");
+            rotateBack = true;
+            whichWay = "LEFT";
             break;
         case -1: //the alt + b keys were pressed
-            console.log("Spin the back face - inverse.");
+            rotateBack = true;
+            whichWay = "RIGHT";
             break;
     }
 
-    gameCube.switchFaces(whichWay);
+    if(rotateBack)
+        gameCube.rotateBackFace(whichWay);
+    else
+        gameCube.switchFaces(whichWay);
 }
