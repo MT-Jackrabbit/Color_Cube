@@ -8,8 +8,8 @@ body {
     flex-direction: column;
     height: 100vh;
     align-items: center;
-    /* justify-content: center; */
     background-color: #F4EEFF;
+    font-family: 'Jost', sans-serif;
 }
 
 header {
@@ -60,7 +60,6 @@ header {
     margin: 0 5px;
     background-color: #424874;
     color: white;
-    font-family: 'Jost', sans-serif;
     font-size: 16px;
 }
 
@@ -195,7 +194,7 @@ button {
 .gg-arrow-down-o, .gg-arrow-up-o {
     display: block;
     background-color: #A6B1E1;
-    margin: 6px 0;
+    margin: 0 3px;
 }
 
 .gg-arrow-left-o, .gg-arrow-right-o {
@@ -224,6 +223,13 @@ button {
 
 .cube-top {
     display: flex;
+    flex-direction: column;
+}
+
+.div__i--spin-cube {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cube-top p {
@@ -242,7 +248,6 @@ button {
     display: flex;
     flex-direction: column;
     margin-top: 35px;
-    /* background-color: black; */
     width: 210px;
     text-align: center;
 }
@@ -253,12 +258,9 @@ button {
 
 .new {
     display: flex;
-    /* border: 2px solid blue; */
-    /* flex-direction: row; */
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    /* border: 1px solid purple; */
     height: 51px;
     width: 51.5px;
 }

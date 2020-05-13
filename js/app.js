@@ -763,7 +763,6 @@ $('.face-left').click(function(event){
 });
 
 $('.face-up').click(function(event){
-    
     gameCube.switchFaces("UP");
 });
 
@@ -810,3 +809,51 @@ $('.rotate-front-right').click(function(event){
 $('.rotate-front-left').click(function(event){
     gameCube.rotateFrontFace("LEFT");
 });
+
+
+//capture the keystrokes and see if they are the arrow keys, b key or alt key
+document.onkeydown = checkKey;
+let keyBuffer = [];
+
+function checkKey(e) {
+
+    let keyStroke = e.keyCode;
+    console.log(keyStroke);
+    keyBuffer.push(keyStroke);
+
+    if(keyStroke === 66 && keyBuffer[keyBuffer.length-2] === 18)
+    {
+        keyStroke = -1; //spin the back face inverse
+    }
+    
+    //clear the key buffer if the alt key was not pressed
+    if(keyStroke !== 18)
+    {
+        keyBuffer = [];
+    }
+
+    let whichWay = "";
+    switch(keyStroke)
+    {
+        case 37: //left arrow
+            whichWay = "LEFT";
+            break;
+        case 38: //up arrow
+            whichWay = "UP";
+            break;
+        case 39: //right arrow
+            whichWay = "RIGHT";
+            break;
+        case 40: //down arrow
+            whichWay = "DOWN";
+            break;
+        case 66: //the b key
+            console.log("Spin the back face.");
+            break;
+        case -1: //the alt + b keys were pressed
+            console.log("Spin the back face - inverse.");
+            break;
+    }
+
+    gameCube.switchFaces(whichWay);
+}
