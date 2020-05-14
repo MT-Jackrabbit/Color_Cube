@@ -137,17 +137,49 @@ class Cube{
                 this.front = right;
                 this.left = front;
                 this.back = left;
+                 //need to turn the back upside down
+                this.invertCubeFace(this.back);
                 this.right = back;
+                //need to turn the right side up
+                this.invertCubeFace(this.right);
                 break;
             case "RIGHT":
                 this.front = left;
                 this.left = back;
+                //need to turn the left side up
+                this.invertCubeFace(this.left);
                 this.back = right;
+                //need to turn the back upside down
+                this.invertCubeFace(this.back);
                 this.right = front;
                 break;
         }
 
         this.setFaceColors();
+    }
+
+    invertCubeFace(faceToChange)
+    {
+        //console.log(faceToChange);
+
+        let temp = [];
+        let upper = faceToChange.length - 1;
+
+        for(let i = 0; i < (faceToChange.length)/2; i++)
+        {
+            //console.log("The front: " + faceToChange[i]);
+            //console.log(faceToChange[i]);
+            //console.log("The back: " + faceToChange[upper]);
+            //console.log(faceToChange[upper]);
+            temp = faceToChange[i];
+            faceToChange[i] = faceToChange[upper];
+            faceToChange[upper] = temp;
+
+            upper--;
+        }
+
+        //console.log(faceToChange);
+        //this.setSmallSquareColors();
     }
 
     //updates the main cube colors to the user
