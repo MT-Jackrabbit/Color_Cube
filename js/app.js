@@ -2,14 +2,15 @@ console.log("Welcome to Color Cube!");
 
 //each of the adj.. are the squares that are adjacent to this one
 class Square{
-    constructor(color="green", face="FRONT", number=0, adjUp=0, adjDown=0, adjLeft=0, adjRigh=0){
+    constructor(color="green", face="FRONT", number=0, adjUp=0, adjDown=0, adjLeft=0, adjRight=0){
         this.myColor = color;
         this.myFace = face;
         this.myNumber = number;
         this.adjUp = adjUp;
         this.adjDown = adjDown;
         this.adjLeft = adjLeft;
-        this.adjRight = adjRigh;
+        this.adjRight = adjRight;
+        this.counted = false;
     }
 
     setColor(color){
@@ -110,6 +111,82 @@ class Cube{
         this.switchRows("TOP", "RIGHT");
         this.rotateLeftFace("RIGHT");
         this.rotateRightFace("LEFT");
+    }
+
+    countScore() {
+        let score = 0;
+        const faces = [this.front, this.back, this.down, this.up, this.right, this.left];
+
+        //reset the counted value in each of the squares
+        for(let i = 0; i < faces.length; i++)
+        {
+            for(let j = 0; j < faces[i].length; j++)
+            {
+                faces[i][j].counted = false;
+            }
+        }
+
+        for(let j = 0; j < faces.length; j++)
+        {
+            for(let i = 0; i < faces[j].length; i++)
+            {
+                const myColor = faces[j][i].myColor;
+
+                if(myColor === faces[j][i].adjDown.myColor && !faces[j][i].adjDown.counted)
+                {
+                    //if I havent been counted then count me
+                    if(!faces[j][i].counted)
+                    {
+                        faces[j][i].counted = true;
+                        score++;
+                    }
+                    //also count my adjacent cube    
+                    faces[j][i].adjDown.counted = true;
+                    score++;
+                }
+
+                if(myColor === faces[j][i].adjUp.myColor && !faces[j][i].adjUp.counted)
+                {
+                    //if I havent been counted then count me
+                    if(!faces[j][i].counted)
+                    {
+                        faces[j][i].counted = true;
+                        score++;
+                    }
+                    //also count my adjacent cube    
+                    faces[j][i].adjUp.counted = true;
+                    score++;
+                }
+
+                if(myColor === faces[j][i].adjRight.myColor && !faces[j][i].adjRight.counted)
+                {
+                    //if I havent been counted then count me
+                    if(!faces[j][i].counted)
+                    {
+                        faces[j][i].counted = true;
+                        score++;
+                    }
+                    //also count my adjacent cube    
+                    faces[j][i].adjRight.counted = true;
+                    score++;
+                }
+
+                if(myColor === faces[j][i].adjLeft.myColor && !faces[j][i].adjLeft.counted)
+                {
+                    //if I havent been counted then count me
+                    if(!faces[j][i].counted)
+                    {
+                        faces[j][i].counted = true;
+                        score++;
+                    }
+                    //also count my adjacent cube    
+                    faces[j][i].adjLeft.counted = true;
+                    score++;
+                }
+            }
+        }
+
+        return score;
     }
 
     //options: UP || DOWN || LEFT || RIGHT
@@ -215,99 +292,99 @@ class Cube{
         {
             //update the up face
             $smallCubes.eq(u).css("background-color", this.up[i].myColor);
-            $smallCubes.eq(u).text(this.up[i].myNumber);
+            //$smallCubes.eq(u).text(this.up[i].myNumber);
             u++;
             //update the left face
             $smallCubes.eq(l).css("background-color", this.left[i].myColor);
-            $smallCubes.eq(l).text(this.left[i].myNumber);
+            //$smallCubes.eq(l).text(this.left[i].myNumber);
             l++;
             //update the front face
             $smallCubes.eq(f).css("background-color", this.front[i].myColor);
-            $smallCubes.eq(f).text(this.front[i].myNumber);
+            //$smallCubes.eq(f).text(this.front[i].myNumber);
             f++;
             //update the right face
             $smallCubes.eq(r).css("background-color", this.right[i].myColor);
-            $smallCubes.eq(r).text(this.right[i].myNumber);
+            //$smallCubes.eq(r).text(this.right[i].myNumber);
             r++;
             //update the back face (the back face is inverted)
             $smallCubes.eq(b).css("background-color", this.back[j].myColor);
-            $smallCubes.eq(b).text(this.back[j].myNumber);
+            //$smallCubes.eq(b).text(this.back[j].myNumber);
             b++;
             j--;
             //update the down face
             $smallCubes.eq(d).css("background-color", this.down[i].myColor);
-            $smallCubes.eq(d).text(this.down[i].myNumber);
+            //$smallCubes.eq(d).text(this.down[i].myNumber);
             d++;
         }
     }
 
     updateAdjSquares()
     {
-        //front face
-        // this.front[0].setAdjSquares(this.up[6], this.front[1], this.front[3], this.left[2]);
-        // this.front[1].setAdjSquares(this.up[7], this.front[2], this.front[4], this.front[0]);
-        // this.front[2].setAdjSquares(this.up[8], this.right[0], this.front[5], this.front[1]);
-        // this.front[3].setAdjSquares(this.front[0], this.front[4], this.front[6], this.left[5]);
-        // this.front[4].setAdjSquares(this.front[1], this.front[5], this.front[7], this.front[3]);
-        // this.front[5].setAdjSquares(this.front[2], this.right[3], this.front[8], this.front[4]);
-        // this.front[6].setAdjSquares(this.front[3], this.front[7], this.down[0], this.left[8]);
-        // this.front[7].setAdjSquares(this.front[4], this.front[8], this.down[1], this.front[6]);
-        // this.front[8].setAdjSquares(this.front[5], this.right[6], this.down[2], this.front[7]);
+        //front face (up, right, down, left)
+        this.front[0].setAdjSquares(this.up[6], this.front[1], this.front[3], this.left[2]);
+        this.front[1].setAdjSquares(this.up[7], this.front[2], this.front[4], this.front[0]);
+        this.front[2].setAdjSquares(this.up[8], this.right[0], this.front[5], this.front[1]);
+        this.front[3].setAdjSquares(this.front[0], this.front[4], this.front[6], this.left[5]);
+        this.front[4].setAdjSquares(this.front[1], this.front[5], this.front[7], this.front[3]);
+        this.front[5].setAdjSquares(this.front[2], this.right[3], this.front[8], this.front[4]);
+        this.front[6].setAdjSquares(this.front[3], this.front[7], this.down[0], this.left[8]);
+        this.front[7].setAdjSquares(this.front[4], this.front[8], this.down[1], this.front[6]);
+        this.front[8].setAdjSquares(this.front[5], this.right[6], this.down[2], this.front[7]);
 
-        // //up face
-        //  this.up[0].setAdjSquares(this.back[6], this.up[1], this.up[3], this.left[0]);
-        //  this.up[1].setAdjSquares(this.back[7], this.up[2], this.up[4], this.up[0]);
-        //  this.up[2].setAdjSquares(this.back[8], this.right[0], this.up[5], this.up[1]);
-        //  this.up[3].setAdjSquares(this.up[0], this.up[4], this.up[6], this.left[5]);
-        //  this.up[4].setAdjSquares(this.up[1], this.up[5], this.up[7], this.up[3]);
-        //  this.up[5].setAdjSquares(this.up[2], this.right[3], this.up[8], this.up[4]);
-        //  this.up[6].setAdjSquares(this.up[3], this.up[7], this.down[0], this.left[8]);
-        //  this.up[7].setAdjSquares(this.up[4], this.up[8], this.down[1], this.up[6]);
-        //  this.up[8].setAdjSquares(this.up[5], this.right[6], this.down[2], this.up[7]);
+        //up face (up, right, down, left)
+        this.up[0].setAdjSquares(this.back[6], this.up[1], this.up[3], this.left[0]);
+        this.up[1].setAdjSquares(this.back[7], this.up[2], this.up[4], this.up[0]);
+        this.up[2].setAdjSquares(this.back[8], this.right[0], this.up[5], this.up[1]);
+        this.up[3].setAdjSquares(this.up[0], this.up[4], this.up[6], this.left[5]);
+        this.up[4].setAdjSquares(this.up[1], this.up[5], this.up[7], this.up[3]);
+        this.up[5].setAdjSquares(this.up[2], this.right[3], this.up[8], this.up[4]);
+        this.up[6].setAdjSquares(this.up[3], this.up[7], this.front[0], this.left[2]);
+        this.up[7].setAdjSquares(this.up[4], this.up[8], this.front[1], this.up[6]);
+        this.up[8].setAdjSquares(this.up[5], this.right[0], this.front[2], this.up[7]);
 
-        // //down face
-        // this.down[0].setAdjSquares(this.up[6], this.down[1], this.down[3], this.left[2]);
-        // this.down[1].setAdjSquares(this.up[7], this.down[2], this.down[4], this.down[0]);
-        // this.down[2].setAdjSquares(this.up[8], this.right[0], this.down[5], this.down[1]);
-        // this.down[3].setAdjSquares(this.down[0], this.down[4], this.down[6], this.left[5]);
-        // this.down[4].setAdjSquares(this.down[1], this.down[5], this.down[7], this.down[3]);
-        // this.down[5].setAdjSquares(this.down[2], this.right[3], this.down[8], this.down[4]);
-        // this.down[6].setAdjSquares(this.down[3], this.down[7], this.down[0], this.left[8]);
-        // this.down[7].setAdjSquares(this.down[4], this.down[8], this.down[1], this.down[6]);
-        // this.down[8].setAdjSquares(this.down[5], this.right[6], this.down[2], this.down[7]);
+        //down face (up, right, down, left)
+        this.down[0].setAdjSquares(this.front[6], this.down[1], this.down[3], this.left[8]);
+        this.down[1].setAdjSquares(this.front[7], this.down[2], this.down[4], this.down[0]);
+        this.down[2].setAdjSquares(this.front[8], this.right[6], this.down[5], this.down[1]);
+        this.down[3].setAdjSquares(this.down[0], this.down[4], this.down[6], this.left[7]);
+        this.down[4].setAdjSquares(this.down[1], this.down[5], this.down[7], this.down[3]);
+        this.down[5].setAdjSquares(this.down[2], this.right[7], this.down[8], this.down[4]);
+        this.down[6].setAdjSquares(this.down[3], this.down[7], this.back[0], this.left[6]);
+        this.down[7].setAdjSquares(this.down[4], this.down[8], this.back[1], this.down[6]);
+        this.down[8].setAdjSquares(this.down[5], this.right[8], this.back[2], this.down[7]);
 
-        // //back face
-        //  this.back[0].setAdjSquares(this.up[6], this.back[1], this.back[3], this.left[2]);
-        //  this.back[1].setAdjSquares(this.up[7], this.back[2], this.back[4], this.back[0]);
-        //  this.back[2].setAdjSquares(this.up[8], this.right[0], this.back[5], this.back[1]);
-        //  this.back[3].setAdjSquares(this.back[0], this.back[4], this.back[6], this.left[5]);
-        //  this.back[4].setAdjSquares(this.back[1], this.back[5], this.back[7], this.back[3]);
-        //  this.back[5].setAdjSquares(this.back[2], this.right[3], this.back[8], this.back[4]);
-        //  this.back[6].setAdjSquares(this.back[3], this.back[7], this.down[0], this.left[8]);
-        //  this.back[7].setAdjSquares(this.back[4], this.back[8], this.down[1], this.back[6]);
-        //  this.back[8].setAdjSquares(this.back[5], this.right[6], this.down[2], this.back[7]);
+        //back face
+        this.back[0].setAdjSquares(this.down[6], this.back[1], this.back[3], this.left[6]);
+        this.back[1].setAdjSquares(this.down[7], this.back[2], this.back[4], this.back[0]);
+        this.back[2].setAdjSquares(this.down[8], this.right[8], this.back[5], this.back[1]);
+        this.back[3].setAdjSquares(this.back[0], this.back[4], this.back[6], this.left[3]);
+        this.back[4].setAdjSquares(this.back[1], this.back[5], this.back[7], this.back[3]);
+        this.back[5].setAdjSquares(this.back[2], this.right[5], this.back[8], this.back[4]);
+        this.back[6].setAdjSquares(this.back[3], this.back[7], this.up[0], this.left[0]);
+        this.back[7].setAdjSquares(this.back[4], this.back[8], this.up[1], this.back[6]);
+        this.back[8].setAdjSquares(this.back[5], this.right[2], this.up[2], this.back[7]);
 
-        // //left face
-        // this.left[0].setAdjSquares(this.up[6], this.left[1], this.left[3], this.left[2]);
-        // this.left[1].setAdjSquares(this.up[7], this.left[2], this.left[4], this.left[0]);
-        // this.left[2].setAdjSquares(this.up[8], this.right[0], this.left[5], this.left[1]);
-        // this.left[3].setAdjSquares(this.left[0], this.left[4], this.left[6], this.left[5]);
-        // this.left[4].setAdjSquares(this.left[1], this.left[5], this.left[7], this.left[3]);
-        // this.left[5].setAdjSquares(this.left[2], this.right[3], this.left[8], this.left[4]);
-        // this.left[6].setAdjSquares(this.left[3], this.left[7], this.down[0], this.left[8]);
-        // this.left[7].setAdjSquares(this.left[4], this.left[8], this.down[1], this.left[6]);
-        // this.left[8].setAdjSquares(this.left[5], this.right[6], this.down[2], this.left[7]);
+        //left face
+        this.left[0].setAdjSquares(this.up[0], this.left[1], this.left[3], this.back[6]);
+        this.left[1].setAdjSquares(this.up[3], this.left[2], this.left[4], this.left[0]);
+        this.left[2].setAdjSquares(this.up[6], this.front[0], this.left[5], this.left[1]);
+        this.left[3].setAdjSquares(this.left[0], this.left[4], this.left[6], this.back[3]);
+        this.left[4].setAdjSquares(this.left[1], this.left[5], this.left[7], this.left[3]);
+        this.left[5].setAdjSquares(this.left[2], this.front[3], this.left[8], this.left[4]);
+        this.left[6].setAdjSquares(this.left[3], this.left[7], this.down[6], this.back[0]);
+        this.left[7].setAdjSquares(this.left[4], this.left[8], this.down[3], this.left[6]);
+        this.left[8].setAdjSquares(this.left[5], this.front[6], this.down[0], this.left[7]);
 
-        //  //right face
-        //  this.right[0].setAdjSquares(this.up[6], this.right[1], this.right[3], this.left[2]);
-        //  this.right[1].setAdjSquares(this.up[7], this.right[2], this.right[4], this.right[0]);
-        //  this.right[2].setAdjSquares(this.up[8], this.right[0], this.right[5], this.right[1]);
-        //  this.right[3].setAdjSquares(this.right[0], this.right[4], this.right[6], this.left[5]);
-        //  this.right[4].setAdjSquares(this.right[1], this.right[5], this.right[7], this.right[3]);
-        //  this.right[5].setAdjSquares(this.right[2], this.right[3], this.right[8], this.right[4]);
-        //  this.right[6].setAdjSquares(this.right[3], this.right[7], this.down[0], this.left[8]);
-        //  this.right[7].setAdjSquares(this.right[4], this.right[8], this.down[1], this.right[6]);
-        //  this.right[8].setAdjSquares(this.right[5], this.right[6], this.down[2], this.right[7]);
+        //right face
+        this.right[0].setAdjSquares(this.up[8], this.right[1], this.right[3], this.front[2]);
+        this.right[1].setAdjSquares(this.up[5], this.right[2], this.right[4], this.right[0]);
+        this.right[2].setAdjSquares(this.up[2], this.back[8], this.right[5], this.right[1]);
+        this.right[3].setAdjSquares(this.right[0], this.right[4], this.right[6], this.front[5]);
+        this.right[4].setAdjSquares(this.right[1], this.right[5], this.right[7], this.right[3]);
+        this.right[5].setAdjSquares(this.right[2], this.back[5], this.right[8], this.right[4]);
+        this.right[6].setAdjSquares(this.right[3], this.right[7], this.down[2], this.front[8]);
+        this.right[7].setAdjSquares(this.right[4], this.right[8], this.down[5], this.right[6]);
+        this.right[8].setAdjSquares(this.right[5], this.back[2], this.down[8], this.right[7]);
     }
 
     //whichWay: LEFT || RIGHT
@@ -456,76 +533,76 @@ class Cube{
 
     //whichWay: LEFT || RIGHT
     rotateFrontFace(whichWay){
-        const color0 = this.front[0].myColor;
-        const color1 = this.front[1].myColor;
-        const color2 = this.front[2].myColor;
-        const color3 = this.front[3].myColor;
-        const color5 = this.front[5].myColor;
-        const color6 = this.front[6].myColor;
-        const color7 = this.front[7].myColor;
-        const color8 = this.front[8].myColor;
-        const leftColors = [this.left[2].myColor, this.left[5].myColor, this.left[8].myColor];
-        const upColors = [this.up[6].myColor, this.up[7].myColor, this.up[8].myColor];
-        const rightColors = [this.right[0].myColor, this.right[3].myColor, this.right[6].myColor];
-        const downColors = [this.down[0].myColor, this.down[1].myColor, this.down[2].myColor];
+        const color0 = this.front[0];
+        const color1 = this.front[1];
+        const color2 = this.front[2];
+        const color3 = this.front[3];
+        const color5 = this.front[5];
+        const color6 = this.front[6];
+        const color7 = this.front[7];
+        const color8 = this.front[8];
+        const leftColors = [this.left[2], this.left[5], this.left[8]];
+        const upColors = [this.up[6], this.up[7], this.up[8]];
+        const rightColors = [this.right[0], this.right[3], this.right[6]];
+        const downColors = [this.down[0], this.down[1], this.down[2]];
 
         switch(whichWay.toUpperCase())
         {
             case "RIGHT":
                 //change front face
-                this.front[0].myColor = color6;
-                this.front[1].myColor = color3;
-                this.front[2].myColor = color0;
-                this.front[3].myColor = color7;
-                this.front[5].myColor = color1;
-                this.front[6].myColor = color8;
-                this.front[7].myColor = color5;
-                this.front[8].myColor = color2;
+                this.front[0] = color6;
+                this.front[1] = color3;
+                this.front[2] = color0;
+                this.front[3] = color7;
+                this.front[5] = color1;
+                this.front[6] = color8;
+                this.front[7] = color5;
+                this.front[8] = color2;
                 //change left face
-                this.left[2].myColor = downColors[0];
-                this.left[5].myColor = downColors[1];
-                this.left[8].myColor = downColors[2];
+                this.left[2] = downColors[0];
+                this.left[5] = downColors[1];
+                this.left[8] = downColors[2];
                 //change up face
-                this.up[6].myColor = leftColors[0];
-                this.up[7].myColor = leftColors[1];
-                this.up[8].myColor = leftColors[2];
+                this.up[6] = leftColors[2];
+                this.up[7] = leftColors[1];
+                this.up[8] = leftColors[0];
                 //change right face
-                this.right[0].myColor = upColors[0];
-                this.right[3].myColor = upColors[1];
-                this.right[6].myColor = upColors[2];
+                this.right[0] = upColors[0];
+                this.right[3] = upColors[1];
+                this.right[6] = upColors[2];
                 //change down face
-                this.down[0].myColor = rightColors[0];
-                this.down[1].myColor = rightColors[1];
-                this.down[2].myColor = rightColors[2];
+                this.down[0] = rightColors[2];
+                this.down[1] = rightColors[1];
+                this.down[2] = rightColors[0];
                 this.cubeRotation += 90;
                 this.faceRotationCount++;
                 break;
             case "LEFT":
                 //change front face
-                this.front[0].myColor = color2;
-                this.front[1].myColor = color5;
-                this.front[2].myColor = color8;
-                this.front[3].myColor = color1;
-                this.front[5].myColor = color7;
-                this.front[6].myColor = color0;
-                this.front[7].myColor = color3;
-                this.front[8].myColor = color6;
+                this.front[0] = color2;
+                this.front[1] = color5;
+                this.front[2] = color8;
+                this.front[3] = color1;
+                this.front[5] = color7;
+                this.front[6] = color0;
+                this.front[7] = color3;
+                this.front[8] = color6;
                 //change left face
-                this.left[2].myColor = upColors[0];
-                this.left[5].myColor = upColors[1];
-                this.left[8].myColor = upColors[2];
+                this.left[2] = upColors[2];
+                this.left[5] = upColors[1];
+                this.left[8] = upColors[0];
                 //change up face
-                this.up[6].myColor = rightColors[0];
-                this.up[7].myColor = rightColors[1];
-                this.up[8].myColor = rightColors[2];
+                this.up[6] = rightColors[0];
+                this.up[7] = rightColors[1];
+                this.up[8] = rightColors[2];
                 //change right face
-                this.right[0].myColor = downColors[0];
-                this.right[3].myColor = downColors[1];
-                this.right[6].myColor = downColors[2];
+                this.right[0] = downColors[2];
+                this.right[3] = downColors[1];
+                this.right[6] = downColors[0];
                 //change down face
-                this.down[0].myColor = leftColors[0];
-                this.down[1].myColor = leftColors[1];
-                this.down[2].myColor = leftColors[2];
+                this.down[0] = leftColors[0];
+                this.down[1] = leftColors[1];
+                this.down[2] = leftColors[2];
                 this.cubeRotation -= 90;
                 this.faceRotationCount--;
                 break;
@@ -540,74 +617,74 @@ class Cube{
 
     //whichWay: LEFT || RIGHT
     rotateBackFace(whichWay){
-        const color0 = this.back[0].myColor;
-        const color1 = this.back[1].myColor;
-        const color2 = this.back[2].myColor;
-        const color3 = this.back[3].myColor;
-        const color5 = this.back[5].myColor;
-        const color6 = this.back[6].myColor;
-        const color7 = this.back[7].myColor;
-        const color8 = this.back[8].myColor;
-        const leftColors = [this.left[0].myColor, this.left[3].myColor, this.left[6].myColor];
-        const upColors = [this.up[0].myColor, this.up[1].myColor, this.up[2].myColor];
-        const rightColors = [this.right[2].myColor, this.right[5].myColor, this.right[8].myColor];
-        const downColors = [this.down[6].myColor, this.down[7].myColor, this.down[8].myColor];
+        const color0 = this.back[0];
+        const color1 = this.back[1];
+        const color2 = this.back[2];
+        const color3 = this.back[3];
+        const color5 = this.back[5];
+        const color6 = this.back[6];
+        const color7 = this.back[7];
+        const color8 = this.back[8];
+        const leftColors = [this.left[0], this.left[3], this.left[6]];
+        const upColors = [this.up[0], this.up[1], this.up[2]];
+        const rightColors = [this.right[2], this.right[5], this.right[8]];
+        const downColors = [this.down[6], this.down[7], this.down[8]];
 
         switch(whichWay.toUpperCase())
         {
             case "RIGHT":
                 //change back face
-                this.back[0].myColor = color6;
-                this.back[1].myColor = color3;
-                this.back[2].myColor = color0;
-                this.back[3].myColor = color7;
-                this.back[5].myColor = color1;
-                this.back[6].myColor = color8;
-                this.back[7].myColor = color5;
-                this.back[8].myColor = color2;
+                this.back[0] = color6;
+                this.back[1] = color3;
+                this.back[2] = color0;
+                this.back[3] = color7;
+                this.back[5] = color1;
+                this.back[6] = color8;
+                this.back[7] = color5;
+                this.back[8] = color2;
                 //change left face
-                this.left[0].myColor = downColors[0];
-                this.left[3].myColor = downColors[1];
-                this.left[6].myColor = downColors[2];
+                this.left[0] = downColors[0];
+                this.left[3] = downColors[1];
+                this.left[6] = downColors[2];
                 //change up face
-                this.up[0].myColor = leftColors[0];
-                this.up[1].myColor = leftColors[1];
-                this.up[2].myColor = leftColors[2];
+                this.up[0] = leftColors[2];
+                this.up[1] = leftColors[1];
+                this.up[2] = leftColors[0];
                 //change right face
-                this.right[2].myColor = upColors[0];
-                this.right[5].myColor = upColors[1];
-                this.right[8].myColor = upColors[2];
+                this.right[2] = upColors[0];
+                this.right[5] = upColors[1];
+                this.right[8] = upColors[2];
                 //change down face
-                this.down[6].myColor = rightColors[0];
-                this.down[7].myColor = rightColors[1];
-                this.down[8].myColor = rightColors[2];
+                this.down[6] = rightColors[2];
+                this.down[7] = rightColors[1];
+                this.down[8] = rightColors[0];
                 break;
             case "LEFT":
                 //change front face
-                this.back[0].myColor = color2;
-                this.back[1].myColor = color5;
-                this.back[2].myColor = color8;
-                this.back[3].myColor = color1;
-                this.back[5].myColor = color7;
-                this.back[6].myColor = color0;
-                this.back[7].myColor = color3;
-                this.back[8].myColor = color6;
+                this.back[0] = color2;
+                this.back[1] = color5;
+                this.back[2] = color8;
+                this.back[3] = color1;
+                this.back[5] = color7;
+                this.back[6] = color0;
+                this.back[7] = color3;
+                this.back[8] = color6;
                 //change left face
-                this.left[0].myColor = upColors[0];
-                this.left[3].myColor = upColors[1];
-                this.left[6].myColor = upColors[2];
+                this.left[0] = upColors[2];
+                this.left[3] = upColors[1];
+                this.left[6] = upColors[0];
                 //change up face
-                this.up[0].myColor = rightColors[0];
-                this.up[1].myColor = rightColors[1];
-                this.up[2].myColor = rightColors[2];
+                this.up[0] = rightColors[0];
+                this.up[1] = rightColors[1];
+                this.up[2] = rightColors[2];
                 //change right face
-                this.right[2].myColor = downColors[0];
-                this.right[5].myColor = downColors[1];
-                this.right[8].myColor = downColors[2];
+                this.right[2] = downColors[2];
+                this.right[5] = downColors[1];
+                this.right[8] = downColors[0];
                 //change down face
-                this.down[6].myColor = leftColors[0];
-                this.down[7].myColor = leftColors[1];
-                this.down[8].myColor = leftColors[2];
+                this.down[6] = leftColors[0];
+                this.down[7] = leftColors[1];
+                this.down[8] = leftColors[2];
                 break;
         }
 
