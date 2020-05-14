@@ -10,6 +10,7 @@ body {
     align-items: center;
     background-color: #F4EEFF;
     font-family: 'Jost', sans-serif;
+    min-width: 500px;
 }
 
 header {
@@ -22,8 +23,35 @@ header {
     left: 0;
     width: 100vw;
     height: 150px;
-    /* background-image: linear-gradient(to right, red, blue, green, yellow); */
+    /* background-image: linear-gradient(to right top, white, red, blue, green, yellow, orange, white); */
+    background-color: #424874;
+    min-width: 500px;
+}
+
+header h1 {
+    color: white;
+    background-color: rgba(0, 0, 0, .2);
+    padding: 0 10px;
+    font-size: 50px;
+}
+
+.section_info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: #A6B1E1;
+    width: 100vw;
+    height: 30px;
+    margin-top: 5px;
+    min-width: 600px;
+}
+
+.section__player-one {
+    margin-left: 10px;
+}
+
+.section__score-two {
+    margin-right: 10px;
 }
 
 #one {
@@ -53,17 +81,56 @@ header {
     margin: 10px;
 }
 
-.header__section button {
+.section__buttons button {
     border: none;
-    border-radius: 3%;
+    border-radius: 10%;
     width: 65px;
-    height: 65px;
+    height: 25px;
     margin: 0 5px;
-    margin-bottom: 15px;
-    background-image: linear-gradient(to right, orange, yellow, green);
+    margin-top: 10px;
+    /* background-image: linear-gradient(to right, orange, yellow, green); */
+    background-color: #DCD6F7;
     color: black;
     font-size: 12px;
     font-weight: 800;
+    outline: none;
+}
+
+.nav__main {
+    position: absolute;
+    left: 0;
+    top: 185px;
+    height: 30px;
+    width: 150px;
+    margin-top: 5px;
+    /* margin-left: 5px; */
+    background-color:#DCD6F7;
+    overflow: hidden;
+    transition-duration: .3s;
+    /* border: 1px solid black; */
+}
+
+.nav__main:hover {
+    height: 300px;
+}
+
+.nav__items {
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+.nav__menu {
+    text-align: center;
+    background-color: #A6B1E1;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid black;
+    margin: 0;
+}
+
+
+.section__buttons button:hover {
+    cursor: pointer;
 }
 
 .cube button {
@@ -154,7 +221,7 @@ header {
     flex-direction: column;
     align-items: center;
     position: relative;
-    margin-top: 125px;
+    margin-top: 50px;
 }
 
 .outside-container {

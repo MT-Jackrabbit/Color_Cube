@@ -97,7 +97,28 @@ class Cube{
         this.down = faces[5];
         this.face6 = faces[5];
 
+        this.cubeRotation = 0;
+        this.faceRotationCount = 0;
+        $('.cube').css("transform", "rotate(0deg)");
+        this.updateSquareIds();
+        this.setSmallSquareColors();
         this.setFaceColors();
+    }
+
+    scrambleCube()
+    {
+        this.switchColumns("LEFT", "UP");
+        this.switchRows("TOP", "RIGHT");
+        this.switchFaces("UP");
+        this.switchRows("BOTTOM", "LEFT");
+        this.switchColumns("RIGHT", "DOWN");
+        this.switchFaces("RIGHT");
+        this.rotateBackFace("RIGHT");
+        //this.rotateFrontFace("LEFT");
+        this.switchColumns("RIGHT", "DOWN");
+        this.switchRows("TOP", "RIGHT");
+        this.rotateBackFace("RIGHT");
+        this.rotateFrontFace("LEFT");
     }
 
     //options: UP || DOWN || LEFT || RIGHT
@@ -115,28 +136,24 @@ class Cube{
                 this.up = front;
                 this.back = up;
                 this.down = back;
-                //console.log("Rotate faces up!");
                 break;
             case "DOWN":
                 this.front = up;
                 this.up = back;
                 this.back = down;
                 this.down = front;
-                //console.log("Rotate faces down!");
                 break;
             case "LEFT":
                 this.front = right;
                 this.left = front;
                 this.back = left;
                 this.right = back;
-                //console.log("Rotate faces left!");
                 break;
             case "RIGHT":
                 this.front = left;
                 this.left = back;
                 this.back = right;
                 this.right = front;
-                //console.log("Rotate faces right!");
                 break;
         }
 
@@ -202,8 +219,6 @@ class Cube{
         const color7 = this.up[7].myColor;
         const color8 = this.up[8].myColor;
 
-        //console.log(currFace);
-
         switch(whichWay.toUpperCase())
         {
             case "LEFT":
@@ -239,8 +254,6 @@ class Cube{
         const color6 = this.down[6].myColor;
         const color7 = this.down[7].myColor;
         const color8 = this.down[8].myColor;
-
-        //console.log(currFace);
 
         switch(whichWay.toUpperCase())
         {
@@ -278,8 +291,6 @@ class Cube{
         const color7 = this.right[7].myColor;
         const color8 = this.right[8].myColor;
 
-        //console.log(currFace);
-
         switch(whichWay.toUpperCase())
         {
             case "UP":
@@ -315,8 +326,6 @@ class Cube{
         const color6 = this.left[6].myColor;
         const color7 = this.left[7].myColor;
         const color8 = this.left[8].myColor;
-
-        //console.log(currFace);
 
         switch(whichWay.toUpperCase())
         {
@@ -357,8 +366,6 @@ class Cube{
         const upColors = [this.up[6].myColor, this.up[7].myColor, this.up[8].myColor];
         const rightColors = [this.right[0].myColor, this.right[3].myColor, this.right[6].myColor];
         const downColors = [this.down[0].myColor, this.down[1].myColor, this.down[2].myColor];
-
-        //console.log(currFace);
 
         switch(whichWay.toUpperCase())
         {
@@ -424,8 +431,7 @@ class Cube{
 
         const rotate = `rotate(${this.cubeRotation}deg)`;
         $('.cube').css("transform", rotate);
-        this.updateFaceButtons();
-        //this.setFaceColors();
+        this.updateSquareIds();
         this.setSmallSquareColors();
     }
 
@@ -507,7 +513,7 @@ class Cube{
     }
 
     //this makes sure the control buttons on the front face stay in the correct location
-    updateFaceButtons()
+    updateSquareIds()
     {
         const rotationCount = this.faceRotationCount%4;
 
@@ -524,7 +530,6 @@ class Cube{
                 $squares.eq(6).attr("id", "seven");
                 $squares.eq(7).attr("id", "eight");
                 $squares.eq(8).attr("id", "nine");
-                console.log("Cube #1 is top left!");
         }
         else if(rotationCount === 1 || rotationCount === -3)
         { //cube #7 is top left
@@ -536,7 +541,6 @@ class Cube{
                 $squares.eq(6).attr("id", "one");
                 $squares.eq(7).attr("id", "four");
                 $squares.eq(8).attr("id", "seven");
-                console.log("Cube #7 is top left!");
         }
         else if(rotationCount === 2 || rotationCount === -2)
         { //cube #9 is top left
@@ -548,7 +552,6 @@ class Cube{
                 $squares.eq(6).attr("id", "three");
                 $squares.eq(7).attr("id", "two");
                 $squares.eq(8).attr("id", "one");
-                console.log("Cube #9 is top left!");
         }
         else if(rotationCount === 3 || rotationCount === -1)
         { //cube #3 is top left
@@ -560,7 +563,6 @@ class Cube{
                 $squares.eq(6).attr("id", "nine");
                 $squares.eq(7).attr("id", "six");
                 $squares.eq(8).attr("id", "three");
-                console.log("Cube #3 is top left!");
         }
     }
 
@@ -916,7 +918,6 @@ $('.face-down').click(function(event){
 
 $('.button__three-right').click(function(event){
     const parentId = $('.button__three-right').parent().attr("id");
-    //console.log(parentId);
     switch(parentId)
     {
         case "one":
@@ -936,7 +937,6 @@ $('.button__three-right').click(function(event){
 
 $('.button__one-left').click(function(event){
     const parentId = $('.button__one-left').parent().attr("id");
-    //console.log(parentId);
     switch(parentId)
     {
         case "one":
@@ -956,7 +956,6 @@ $('.button__one-left').click(function(event){
 
 $('.button__nine-right').click(function(event){
     const parentId = $('.button__nine-right').parent().attr("id");
-    //console.log(parentId);
     switch(parentId)
     {
         case "one":
@@ -976,7 +975,6 @@ $('.button__nine-right').click(function(event){
 
 $('.button__seven-left').click(function(event){
     const parentId = $('.button__seven-left').parent().attr("id");
-    //console.log(parentId);
     switch(parentId)
     {
         case "one":
@@ -996,7 +994,6 @@ $('.button__seven-left').click(function(event){
 
 $('.button__one-top').click(function(event){
     const parentId = $('.button__one-top').parent().attr("id");
-    //console.log(parentId);
     switch(parentId)
     {
         case "one":
@@ -1017,7 +1014,6 @@ $('.button__one-top').click(function(event){
 
 $('.button__seven-bottom').click(function(event){
     const parentId = $('.button__seven-bottom').parent().attr("id");
-    //console.log(parentId);
     switch(parentId)
     {
         case "one":
@@ -1037,7 +1033,6 @@ $('.button__seven-bottom').click(function(event){
 
 $('.button__three-top').click(function(event){
     const parentId = $('.button__three-top').parent().attr("id");
-    //console.log(parentId);
     switch(parentId)
     {
         case "one":
@@ -1057,7 +1052,6 @@ $('.button__three-top').click(function(event){
 
 $('.button__nine-bottom').click(function(event){
     const parentId = $('.button__nine-bottom').parent().attr("id");
-    //console.log(parentId);
     switch(parentId)
     {
         case "one":
@@ -1084,6 +1078,27 @@ $('.rotate-front-left').click(function(event){
     gameCube.rotateFrontFace("LEFT");
 });
 
+$('.header__button--scramble-reset').click(function(event){
+
+    const $button = $('.header__button--scramble-reset');
+
+    if($button.text() === "Scramble")
+    {
+        const randomNum = Math.floor(Math.random() * 4);
+    
+        for(let i = 0; i <= randomNum; i++)
+            gameCube.scrambleCube();
+        
+        $button.text("Reset");
+    }
+    else if($button.text() === "Reset")
+    {
+        gameCube.fillCube();
+
+        $button.text("Scramble");
+    }
+});
+
 //capture the keystrokes and see if they are the arrow keys, b key or alt key
 document.onkeydown = checkKey;
 let keyBuffer = [];
@@ -1092,7 +1107,6 @@ function checkKey(e) {
 
     let keyStroke = e.keyCode;
     let rotateBack = false;
-    //console.log(keyStroke);
     keyBuffer.push(keyStroke);
 
     if(keyStroke === 66 && keyBuffer[keyBuffer.length-2] === 18)
