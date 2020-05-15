@@ -1314,6 +1314,7 @@ $('.section__button--start-time').click(function(event){
 
 $('.nav__main').mouseenter(function(event){
     $('.gg-list').hide();
+    $('.nav__main').css("height", "225px");
 });
 
 $('.nav__main').mouseleave(function(event){
@@ -1333,10 +1334,16 @@ $('.gg-close-r').click(function(){
 
 $('#game-type').mouseleave(function(event){
     $('#game-type ul').css('display', 'none');
+    $('.nav__main').css('height', '225px');
 });
 
-$('#game-type').click(function(){
+$('#game-type').click(function(event){
     $('#game-type ul').css('display', 'block');
+    $('.nav__main').css('height', '245px');
+});
+
+$('.nav__main').mouseleave(function(event){
+    $('.nav__main').css('height', '20px');
 });
 
 $('#solo-play').click(function(){
@@ -1353,10 +1360,12 @@ $('#dual-play').click(function(){
 
 $('#game-time').mouseleave(function(event){
     $('#game-time ul').css('display', 'none');
+    $('.nav__main').css('height', '225px');
 });
 
 $('#game-time').click(function(event){
     $('#game-time ul').css('display', 'block');
+    $('.nav__main').css('height', '265px');
 });
 
 $('#six-mins').click(function(event) {
