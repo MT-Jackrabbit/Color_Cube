@@ -35,6 +35,21 @@ header h1 {
     font-size: 50px;
 }
 
+.game-over{
+    position: absolute;
+    top: 37vh;
+    font-size: 75px;
+    height: 225px;
+    line-height: 175px;
+    text-align: center;
+    background-image: linear-gradient(to right top, white, red, blue, green, yellow, orange, white);
+    color: white;
+    padding: 25px;
+    opacity: 0;
+    z-index: -1;
+    min-width: 450px;
+}
+
 .section_info {
     display: flex;
     align-items: center;
@@ -84,7 +99,7 @@ header h1 {
 .section__buttons button {
     border: none;
     border-radius: 10%;
-    width: 65px;
+    width: 75px;
     height: 25px;
     margin: 0 5px;
     margin-top: 10px;
@@ -112,6 +127,7 @@ header h1 {
 
 .nav__main:hover {
     height: 300px;
+    z-index: 3;
 }
 
 .nav__items {

@@ -113,6 +113,8 @@ class Cube{
         this.rotateRightFace("LEFT");
     }
 
+    //iterates through the faces and looks and all adjacent squares to see if they are the same
+    //color. If same color then score a point and set the squares counted boolean to true.
     countScore() {
         let score = 0;
         const faces = [this.front, this.back, this.down, this.up, this.right, this.left];
@@ -1259,17 +1261,15 @@ $('.rotate-front-left').click(function(event){
     gameCube.rotateFrontFace("LEFT");
 });
 
-$('.header__button--scramble-reset').click(function(event){
+$('.section__button--scramble-reset').click(function(event){
 
-    const $button = $('.header__button--scramble-reset');
+    const $button = $('.section__button--scramble-reset');
 
     if($button.text() === "Scramble")
     {
-        const randomNum = Math.floor(Math.random() * 4);
-    
-        for(let i = 0; i <= randomNum; i++)
-            gameCube.scrambleCube();
-        
+        $('.game-over').css("z-index", -1);
+        $('.game-over').css("opacity", 0);
+        callCubeScramble();
         $button.text("Reset");
     }
     else if($button.text() === "Reset")
@@ -1279,6 +1279,85 @@ $('.header__button--scramble-reset').click(function(event){
         $button.text("Scramble");
     }
 });
+
+let counter;
+let countTimer;
+
+$('.section__button--start-time').click(function(event){
+
+    if($('.section__button--start-time').text() === "Start Game")
+    {
+        callCubeScramble();
+        counter = 10;
+        countTimer = setInterval(updateTimer, 1000);
+        //$('.section__button--start-time').css('opacity', 0.3);
+        $('.section__button--scramble-reset').css('opacity', 0.3);
+        $('.section__button--start-time').text("Stop Game");
+        $('.section__button--scramble-reset').attr("disabled", "true");
+        $('.game-over').css("z-index", -1);
+        $('.game-over').css("opacity", 0);
+    }
+    else
+    {
+        console.log("Stopping the game!");
+        clearInterval(countTimer);
+        $('.section__button--scramble-reset').removeAttr("disabled");
+        $('.section__button--start-time').text("Start Game");
+        $('.section__button--scramble-reset').css('opacity', 1);
+        $('#section__span--time').text(`Time Remaining: 00:00`);
+
+        $('#section__span-plrOne-score').text(`Score: ${gameCube.countScore()}`);
+        //console.log("Your score is: " + gameCube.countScore());
+    }
+});
+
+function callCubeScramble() {
+    const randomNum = Math.floor(Math.random() * 4);
+    
+    for(let i = 0; i <= randomNum; i++)
+        gameCube.scrambleCube();
+}
+
+function updateTimer()
+{
+    let timeString =""
+    const minutes = parseInt(Math.floor(counter / 60));
+    const seconds = parseInt(counter - (minutes * 60));
+    if(minutes < 10)
+    {
+        timeString += `0${minutes}:`;
+    }
+    else
+    {
+        timeString += `${minutes}:`;
+    }
+
+    if(seconds < 10)
+    {
+        timeString += `0${seconds}`;
+    }
+    else
+    {
+        timeString += seconds;
+    }
+
+    //console.log(timeString);
+    $('#section__span--time').text(`Time Remaining: ${timeString}`);
+    counter--;
+
+    if(counter < 0)
+    {
+        clearInterval(countTimer);
+        $('.section__button--scramble-reset').removeAttr("disabled");
+        $('.section__button--start-time').text("Start Game");
+        $('.section__button--scramble-reset').css('opacity', 1);
+        $('#section__span-plrOne-score').text(`Score: ${gameCube.countScore()}`);
+        //console.log("Your score is: " + gameCube.countScore());
+
+        $('.game-over').css("z-index", 2);
+        $('.game-over').css("opacity", 1);
+    }
+}
 
 //capture the keystrokes and see if they are the arrow keys, b key or alt key
 document.onkeydown = checkKey;
