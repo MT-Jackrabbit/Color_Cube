@@ -35,12 +35,6 @@ class Square{
 class Cube{
     constructor()
     {
-        //this.face1; //color change will happen in this variable
-        //this.face2; //color change will happen in this variable
-        //this.face3; //color change will happen in this variable
-        //this.face4; //color change will happen in this variable
-        //this.face5; //color change will happen in this variable
-        //this.face6; //color change will happen in this variable
         this.front; //this variable will hold a copy of one of face1-6
         this.back;  //this variable will hold a copy of one of face1-6
         this.left; //this variable will hold a copy of one of face1-6
@@ -294,28 +288,28 @@ class Cube{
         {
             //update the up face
             $smallCubes.eq(u).css("background-color", this.up[i].myColor);
-            //$smallCubes.eq(u).text(this.up[i].myNumber);
+            $smallCubes.eq(u).text(this.up[i].myNumber);
             u++;
             //update the left face
             $smallCubes.eq(l).css("background-color", this.left[i].myColor);
-            //$smallCubes.eq(l).text(this.left[i].myNumber);
+            $smallCubes.eq(l).text(this.left[i].myNumber);
             l++;
             //update the front face
             $smallCubes.eq(f).css("background-color", this.front[i].myColor);
-            //$smallCubes.eq(f).text(this.front[i].myNumber);
+            $smallCubes.eq(f).text(this.front[i].myNumber);
             f++;
             //update the right face
             $smallCubes.eq(r).css("background-color", this.right[i].myColor);
-            //$smallCubes.eq(r).text(this.right[i].myNumber);
+            $smallCubes.eq(r).text(this.right[i].myNumber);
             r++;
             //update the back face (the back face is inverted)
             $smallCubes.eq(b).css("background-color", this.back[j].myColor);
-            //$smallCubes.eq(b).text(this.back[j].myNumber);
+            $smallCubes.eq(b).text(this.back[j].myNumber);
             b++;
             j--;
             //update the down face
             $smallCubes.eq(d).css("background-color", this.down[i].myColor);
-            //$smallCubes.eq(d).text(this.down[i].myNumber);
+            $smallCubes.eq(d).text(this.down[i].myNumber);
             d++;
         }
     }
@@ -635,15 +629,15 @@ class Cube{
         switch(whichWay.toUpperCase())
         {
             case "RIGHT":
-                //change back face
-                this.back[0] = color6;
-                this.back[1] = color3;
-                this.back[2] = color0;
-                this.back[3] = color7;
-                this.back[5] = color1;
-                this.back[6] = color8;
-                this.back[7] = color5;
-                this.back[8] = color2;
+                //change front face
+                this.back[0] = color2;
+                this.back[1] = color5;
+                this.back[2] = color8;
+                this.back[3] = color1;
+                this.back[5] = color7;
+                this.back[6] = color0;
+                this.back[7] = color3;
+                this.back[8] = color6;
                 //change left face
                 this.left[0] = downColors[0];
                 this.left[3] = downColors[1];
@@ -662,15 +656,15 @@ class Cube{
                 this.down[8] = rightColors[0];
                 break;
             case "LEFT":
-                //change front face
-                this.back[0] = color2;
-                this.back[1] = color5;
-                this.back[2] = color8;
-                this.back[3] = color1;
-                this.back[5] = color7;
-                this.back[6] = color0;
-                this.back[7] = color3;
-                this.back[8] = color6;
+                //change back face
+                this.back[0] = color6;
+                this.back[1] = color3;
+                this.back[2] = color0;
+                this.back[3] = color7;
+                this.back[5] = color1;
+                this.back[6] = color8;
+                this.back[7] = color5;
+                this.back[8] = color2;
                 //change left face
                 this.left[0] = upColors[2];
                 this.left[3] = upColors[1];
