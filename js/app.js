@@ -95,10 +95,8 @@ class Cube{
     {
         this.switchColumns("LEFT", "UP");
         this.switchRows("TOP", "RIGHT");
-        //this.switchFaces("UP");
         this.switchRows("BOTTOM", "LEFT");
         this.switchColumns("RIGHT", "DOWN");
-        //this.switchFaces("RIGHT");
         this.rotateBackFace("RIGHT");
         this.rotateFrontFace("LEFT");
         this.switchColumns("RIGHT", "DOWN");
@@ -288,28 +286,28 @@ class Cube{
         {
             //update the up face
             $smallCubes.eq(u).css("background-color", this.up[i].myColor);
-            $smallCubes.eq(u).text(this.up[i].myNumber);
+            //$smallCubes.eq(u).text(this.up[i].myNumber);
             u++;
             //update the left face
             $smallCubes.eq(l).css("background-color", this.left[i].myColor);
-            $smallCubes.eq(l).text(this.left[i].myNumber);
+            //$smallCubes.eq(l).text(this.left[i].myNumber);
             l++;
             //update the front face
             $smallCubes.eq(f).css("background-color", this.front[i].myColor);
-            $smallCubes.eq(f).text(this.front[i].myNumber);
+            //$smallCubes.eq(f).text(this.front[i].myNumber);
             f++;
             //update the right face
             $smallCubes.eq(r).css("background-color", this.right[i].myColor);
-            $smallCubes.eq(r).text(this.right[i].myNumber);
+            //$smallCubes.eq(r).text(this.right[i].myNumber);
             r++;
             //update the back face (the back face is inverted)
             $smallCubes.eq(b).css("background-color", this.back[j].myColor);
-            $smallCubes.eq(b).text(this.back[j].myNumber);
+            //$smallCubes.eq(b).text(this.back[j].myNumber);
             b++;
             j--;
             //update the down face
             $smallCubes.eq(d).css("background-color", this.down[i].myColor);
-            $smallCubes.eq(d).text(this.down[i].myNumber);
+            //$smallCubes.eq(d).text(this.down[i].myNumber);
             d++;
         }
     }
