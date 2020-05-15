@@ -1082,6 +1082,10 @@ class Cube{
 }
 
 const gameCube = new Cube(); //the main cube that contains all the data
+let counter = 120; //stores the game time value in seconds default is 2 minutes
+let countTimer; //stores the setInterval() variable so it can be cancelled when expired
+let gameType = 0; //0 represents SOLO play, 1 will represent DUAL play
+let gameTime = 0; //0 represents two minutes, 1 represent four minutes, 2 represents six minutes
 
 $('.face-right').click(function(event){
     gameCube.switchFaces("RIGHT");
@@ -1280,20 +1284,17 @@ $('.section__button--scramble-reset').click(function(event){
     }
 });
 
-let counter;
-let countTimer;
-
 $('.section__button--start-time').click(function(event){
 
     if($('.section__button--start-time').text() === "Start Game")
     {
+        resetGameTime();
         callCubeScramble();
-        counter = 10;
         countTimer = setInterval(updateTimer, 1000);
-        //$('.section__button--start-time').css('opacity', 0.3);
         $('.section__button--scramble-reset').css('opacity', 0.3);
         $('.section__button--start-time').text("Stop Game");
         $('.section__button--scramble-reset').attr("disabled", "true");
+        $('.section__button--scramble-reset').css("cursor", "default");
         $('.game-over').css("z-index", -1);
         $('.game-over').css("opacity", 0);
     }
@@ -1304,13 +1305,79 @@ $('.section__button--start-time').click(function(event){
         $('.section__button--scramble-reset').removeAttr("disabled");
         $('.section__button--start-time').text("Start Game");
         $('.section__button--scramble-reset').css('opacity', 1);
-        $('#section__span--time').text(`Time Remaining: 00:00`);
+        $('.section__button--scramble-reset').css("cursor", "pointer");
+        $('#section__span--time').text(`Time Remaining: ${getTimeString(counter)}`);
 
         $('#section__span-plrOne-score').text(`Score: ${gameCube.countScore()}`);
-        //console.log("Your score is: " + gameCube.countScore());
     }
 });
 
+$('.nav__main').mouseenter(function(event){
+    $('.gg-list').hide();
+});
+
+$('.nav__main').mouseleave(function(event){
+    $('.gg-list').show();
+});
+
+$('#game-play').click(function(){
+    $('.body__section--game-play').css('z-index', 3);
+    $('.body__section--game-play').css('visibility', 'visible');
+});
+
+//close button for game-play display
+$('.gg-close-r').click(function(){
+    $('.body__section--game-play').css('z-index', -3);
+    $('.body__section--game-play').css('visibility', 'hidden');
+});
+
+$('#game-type').mouseleave(function(event){
+    $('#game-type ul').css('display', 'none');
+});
+
+$('#game-type').click(function(){
+    $('#game-type ul').css('display', 'block');
+});
+
+$('#solo-play').click(function(){
+    gameType = 0;
+    $('#section__player-two').css("color", "#A6B1E1");
+    $('#section__score-two').css("color", "#A6B1E1");
+});
+
+$('#dual-play').click(function(){
+    gameType = 1;
+    $('#section__player-two').css("color", "black");
+    $('#section__score-two').css("color", "black");
+});
+
+$('#game-time').mouseleave(function(event){
+    $('#game-time ul').css('display', 'none');
+});
+
+$('#game-time').click(function(event){
+    $('#game-time ul').css('display', 'block');
+});
+
+$('#six-mins').click(function(event) {
+    counter = 360;
+    gameTime = 2;
+    $('#section__span--time').text('Time Remaining: 06:00');
+});
+
+$('#four-mins').click(function(event) {
+    counter = 240;
+    gameTime = 1;
+    $('#section__span--time').text('Time Remaining: 04:00');
+});
+
+$('#two-mins').click(function(event) {
+    counter = 120;
+    gameTime = 0;
+    $('#section__span--time').text('Time Remaining: 02:00');
+});
+
+//scrambles the cube with a random amount of turns
 function callCubeScramble() {
     const randomNum = Math.floor(Math.random() * 4);
     
@@ -1318,30 +1385,28 @@ function callCubeScramble() {
         gameCube.scrambleCube();
 }
 
+//resets the game counter depending on thegame time settings
+function resetGameTime()
+{
+    switch(gameTime)
+    {
+        case 0:
+            counter = 120;
+            break;
+        case 1:
+            counter = 240;
+            break;
+        case 2:
+            counter = 360;
+            break;
+    }
+}
+
+//updates the 'Time Remaining' string on the UI.  Also clears the interval when the counter reaches zero
 function updateTimer()
 {
-    let timeString =""
-    const minutes = parseInt(Math.floor(counter / 60));
-    const seconds = parseInt(counter - (minutes * 60));
-    if(minutes < 10)
-    {
-        timeString += `0${minutes}:`;
-    }
-    else
-    {
-        timeString += `${minutes}:`;
-    }
+    let timeString = getTimeString(counter);
 
-    if(seconds < 10)
-    {
-        timeString += `0${seconds}`;
-    }
-    else
-    {
-        timeString += seconds;
-    }
-
-    //console.log(timeString);
     $('#section__span--time').text(`Time Remaining: ${timeString}`);
     counter--;
 
@@ -1351,18 +1416,46 @@ function updateTimer()
         $('.section__button--scramble-reset').removeAttr("disabled");
         $('.section__button--start-time').text("Start Game");
         $('.section__button--scramble-reset').css('opacity', 1);
+        $('.section__button--scramble-reset').css("cursor", "pointer");
         $('#section__span-plrOne-score').text(`Score: ${gameCube.countScore()}`);
-        //console.log("Your score is: " + gameCube.countScore());
 
         $('.game-over').css("z-index", 2);
         $('.game-over').css("opacity", 1);
     }
 }
 
+//takes a number in seconds and converts it into a min:sec string (00:00)
+function getTimeString(seconds)
+{
+    let timeString =""
+    const minutes = parseInt(Math.floor(seconds / 60));
+    const secs = parseInt(seconds - (minutes * 60));
+    if(minutes < 10)
+    {
+        timeString += `0${minutes}:`;
+    }
+    else
+    {
+        timeString += `${minutes}:`;
+    }
+
+    if(secs < 10)
+    {
+        timeString += `0${secs}`;
+    }
+    else
+    {
+        timeString += secs;
+    }
+
+    return timeString;
+}
+
 //capture the keystrokes and see if they are the arrow keys, b key or alt key
 document.onkeydown = checkKey;
 let keyBuffer = [];
 
+//checks the key strokes to see if the user pressed the 'D', 'ALT+D', left arrow, right arrow, up arrow, down arrow
 function checkKey(e) {
 
     let keyStroke = e.keyCode;

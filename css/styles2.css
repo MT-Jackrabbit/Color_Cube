@@ -50,6 +50,50 @@ header h1 {
     min-width: 450px;
 }
 
+.body__section--game-play {
+    position: absolute;
+    background-color: rgba(66,72,116,.9);
+    height: 370px;
+    width: 450px;
+    min-width: 450px;
+    top: 37vh;
+    z-index: -3;
+    visibility: hidden;
+    color:white;
+}
+
+.body__section--game-play article {
+    margin: 0 10px;
+}
+
+.section__div--game-play-header{
+    text-align: center;
+}
+
+#game-play:hover {
+    cursor: pointer;
+}
+
+#game-type ul {
+    display: none;
+}
+
+#game-type:hover {
+    cursor: pointer;
+}
+
+#game-time ul {
+    display: none;
+}
+
+#game-time:hover {
+    cursor: pointer;
+}
+
+.gg-close-r:hover {
+    cursor: pointer;
+}
+
 .section_info {
     display: flex;
     align-items: center;
@@ -61,12 +105,17 @@ header h1 {
     min-width: 600px;
 }
 
-.section__player-one {
+#section__player-one {
     margin-left: 10px;
 }
 
-.section__score-two {
+#section__player-two {
+    color: #A6B1E1;
+}
+
+#section__score-two {
     margin-right: 10px;
+    color: #A6B1E1;
 }
 
 #one {
@@ -115,18 +164,21 @@ header h1 {
     position: absolute;
     left: 0;
     top: 185px;
-    height: 30px;
-    width: 150px;
+    height: 20px;/*225px;*/
+    width: 23px;/*150px;*/
     margin-top: 5px;
-    /* margin-left: 5px; */
     background-color:#DCD6F7;
     overflow: hidden;
-    transition-duration: .3s;
-    /* border: 1px solid black; */
+    transition-duration: .2s;
+}
+
+.nav__main ul {
+    list-style: none;
 }
 
 .nav__main:hover {
-    height: 300px;
+    width: 150px;
+    height: 225px;
     z-index: 3;
 }
 
@@ -135,15 +187,18 @@ header h1 {
     margin-bottom: 10px;
 }
 
+.nav__items li {
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
 .nav__menu {
     text-align: center;
     background-color: #A6B1E1;
     height: 30px;
     line-height: 30px;
     border: 1px solid black;
-    margin: 0;
 }
-
 
 .section__buttons button:hover {
     cursor: pointer;
@@ -378,46 +433,3 @@ header h1 {
 .orange {
     background-color: orange;
 }
-
-/* .small-box {
-    width: 40px;
-    height: 40px;
-    background-color: green;
-    border: 1px solid black;
-}
-
-.small-four {
-    display: flex;
-
-}
-
-aside {
-    background-color: black;
-    position: absolute;
-    left: 20px;
-    top: 250px;
-}
-
-#one {
-    background-color: white;
-}
-
-#two {
-    background-color: red;
-}
-
-#three {
-    background-color: green;
-}
-
-#four {
-    background-color: orange;
-}
-
-#five {
-    background-color: blue;
-}
-
-#six {
-    background-color: yellow;
-} */
