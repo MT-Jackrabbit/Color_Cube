@@ -90,6 +90,14 @@ header h1 {
     cursor: pointer;
 }
 
+#player-names ul {
+    display: none;
+}
+
+#player-names:hover {
+    cursor: pointer;
+}
+
 .gg-close-r:hover {
     cursor: pointer;
 }

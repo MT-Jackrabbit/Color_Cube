@@ -1,4 +1,51 @@
-			COLOR CUBE - User Story
+COLOR CUBE - Game Play
+There are two buttons in each of the corner squares that allow for the rows to move left/right
+or the column of squares to move up/down. The center column and center row DO NOT move.
+
+There are four buttons above the cube that control which way the faces move.  Using the up/down
+button will rotate the up or down face to the front face and move the other faces in the corresponding
+direction.  Using the left/right button will rotate the left or right face to the front and the other
+faces in the corresponding direction.  The arrows on the keypad will also rotate the faces of the cube.
+
+There are two buttons in the middle of the front face.  These buttons will rotate the front face
+either clockwise or counter-clockwise.  The direction of the arrow will indicate which direction the face will
+rotate.
+
+The back face can be rotated by pressing the 'B' or 'ALT+B' on the keypad.  Pressing 'B' will move the
+face counter-clockwise if looking at the front face (clockwise if you were looking at the back face).  'ALT+B'
+will move the back face in the opposite direction.
+
+All six faces are represented in the mini-color map.  As the cube squares are spun this map will
+update with the corresponding cube manipulation.
+
+The game loads with a solved cube. You can either scramble the cube yourself or press the 'Scramble'
+button.  The scramble button will give you a scrambled cube to solve.  Once the 'Scramble' button has
+been pressed it will change to 'Reset'.  Which when pushed will give you a solved cube.
+
+The 'Start Time' button will start the 'Time Remaining' clock and scramble the cube. This allows the user
+to beat the clock in trying to solve the puzzle.  There are three programmed times: 6 minutes, 4 minutes and 2 minutes.
+This time can be changed in the menu.  Once the time expires the game indicates 'Time Up' and gives the
+user a score.  This score is the number of adjacent cubes that they have.  The max score is 54.
+
+User can play free-time at any point.  They do not have to be timed.
+
+The 'menu' is button is located in the upper left corner under 'Player One:'.  When hovered over
+the following options are given:
+	Set Game Type: Allows the user to select SOLO or DUAL. As of this time the DUAL mode is not
+				   functioning.
+	Set Player Names: Allows the user to enter the player(s) names.
+	Set Game Time: Allows the user to change the amount of time they have to solve the puzzle. There
+	               are three options: 2 minutes, 4 minutes and 6 minutes.
+	Game Play: Displays a popup that describes the buttons and what they do.
+	Tutorial: Takes the user to an outside website that walks them through how to solve the puzzle.
+
+
+COLOR CUBE - Technologies used
+
+This game logic is built with javascript.  The UI uses HTML, CSS and jquery.
+			
+			
+COLOR CUBE - User Story
 
 The game will have two user modes.
 1. SOLO MODE - Scramble the cube and try to put all the colors back together.  This round can be timed to see how long it takes to complete the cube.

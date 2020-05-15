@@ -1086,6 +1086,8 @@ let counter = 120; //stores the game time value in seconds default is 2 minutes
 let countTimer; //stores the setInterval() variable so it can be cancelled when expired
 let gameType = 0; //0 represents SOLO play, 1 will represent DUAL play
 let gameTime = 0; //0 represents two minutes, 1 represent four minutes, 2 represents six minutes
+let playerOneName = "";
+let playerTwoName = "";
 
 $('.face-right').click(function(event){
     gameCube.switchFaces("RIGHT");
@@ -1282,17 +1284,19 @@ $('.section__button--scramble-reset').click(function(event){
 
         $button.text("Scramble");
     }
+    resetScore(3);
+    resetGameTime();
 });
 
 $('.section__button--start-time').click(function(event){
-
-    if($('.section__button--start-time').text() === "Start Game")
+    if($('.section__button--start-time').text() === "Start Time")
     {
         resetGameTime();
+        resetScore(1);
         callCubeScramble();
         countTimer = setInterval(updateTimer, 1000);
         $('.section__button--scramble-reset').css('opacity', 0.3);
-        $('.section__button--start-time').text("Stop Game");
+        $('.section__button--start-time').text("Stop Time");
         $('.section__button--scramble-reset').attr("disabled", "true");
         $('.section__button--scramble-reset').css("cursor", "default");
         $('.game-over').css("z-index", -1);
@@ -1303,16 +1307,22 @@ $('.section__button--start-time').click(function(event){
         console.log("Stopping the game!");
         clearInterval(countTimer);
         $('.section__button--scramble-reset').removeAttr("disabled");
-        $('.section__button--start-time').text("Start Game");
+        $('.section__button--start-time').text("Start Time");
         $('.section__button--scramble-reset').css('opacity', 1);
         $('.section__button--scramble-reset').css("cursor", "pointer");
         $('#section__span--time').text(`Time Remaining: ${getTimeString(counter)}`);
 
-        $('#section__span-plrOne-score').text(`Score: ${gameCube.countScore()}`);
+        $('#section__score-one').text(`Score: ${gameCube.countScore()}`);
     }
 });
 
 $('.nav__main').mouseenter(function(event){
+    //if the timer is running then stop the time and reset everything
+    if($('.section__button--start-time').text() === "Stop Time")
+    {
+        $('.section__button--start-time').trigger("click");
+    }
+
     $('.gg-list').hide();
     $('.nav__main').css("height", "225px");
 });
@@ -1386,6 +1396,21 @@ $('#two-mins').click(function(event) {
     $('#section__span--time').text('Time Remaining: 02:00');
 });
 
+$('#player-names').mouseleave(function(event){
+    $('#player-names ul').css('display', 'none');
+    $('.nav__main').css('height', '225px');
+
+    playerOneName = $('#player-one-name').val();
+    playerTwoName = $('#player-two-name').val();
+
+    updatePlayerNames();
+});
+
+$('#player-names').click(function(event){
+    $('#player-names ul').css('display', 'block');
+    $('.nav__main').css('height', '250px');
+});
+
 //scrambles the cube with a random amount of turns
 function callCubeScramble() {
     const randomNum = Math.floor(Math.random() * 4);
@@ -1415,7 +1440,6 @@ function resetGameTime()
 function updateTimer()
 {
     let timeString = getTimeString(counter);
-
     $('#section__span--time').text(`Time Remaining: ${timeString}`);
     counter--;
 
@@ -1423,10 +1447,10 @@ function updateTimer()
     {
         clearInterval(countTimer);
         $('.section__button--scramble-reset').removeAttr("disabled");
-        $('.section__button--start-time').text("Start Game");
+        $('.section__button--start-time').text("Start Time");
         $('.section__button--scramble-reset').css('opacity', 1);
         $('.section__button--scramble-reset').css("cursor", "pointer");
-        $('#section__span-plrOne-score').text(`Score: ${gameCube.countScore()}`);
+        $('#section__score-one').text(`Score: ${gameCube.countScore()}`);
 
         $('.game-over').css("z-index", 2);
         $('.game-over').css("opacity", 1);
@@ -1458,6 +1482,30 @@ function getTimeString(seconds)
     }
 
     return timeString;
+}
+
+//takes a number: 1 = player one score; 2 = player 2 score; 3 = both players
+function resetScore(player)
+{
+    if(player === 1)
+    {
+        $('#section__score-one').text("Score: ");
+    }
+    else if(player === 2)
+    {
+        $('#section__score-two').text("Score: ");
+    }
+    else
+    {
+        $('#section__score-one').text("Score: ");
+        $('#section__score-two').text("Score: ");
+    }
+}
+
+//updates the UI with player names provided by the user.
+function updatePlayerNames() {
+    $('#section__player-one').text(`Player One: ${playerOneName}`);
+    $('#section__player-two').text(`Player Two: ${playerTwoName}`);
 }
 
 //capture the keystrokes and see if they are the arrow keys, b key or alt key

@@ -16,14 +16,14 @@
     </header>
     <section class="section_info">
         <span id="section__player-one">Player One:</span>
-        <span id="section__span-plrOne-score">Score:</span>
+        <span id="section__score-one">Score:</span>
         <span id="section__span--time">Time Remaining: 02:00</span>
         <span id="section__player-two">Player Two:</span>
         <span id="section__score-two">Score:</span>
     </section>
     <section class="section__buttons">
         <button class="section__button--scramble-reset">Scramble</button>
-        <button class="section__button--start-time">Start Game</button>
+        <button class="section__button--start-time">Start Time</button>
     </section>
     <nav class="nav__main">
         <i class="gg-list"></i>
@@ -40,7 +40,16 @@
                         <label for="dual-play">DUAL Play</label>
                     </li>
                 </ul>
-            <li class="nav__items">Set Player Names</li>
+            <li class="nav__items" id="player-names">Set Player Names
+                <ul id="input-names">
+                    <li>
+                        <input type="text" name="player-one" id="player-one-name" placeholder="Player One">
+                    </li>
+                    <li>
+                        <input type="text" name="player-two" id="player-two-name" placeholder="Player Two">
+                    </li>
+                </ul>
+            </li>
             <li class="nav__items" id="game-time">Set Game Time
                 <ul class="select-game-time">
                     <li>
@@ -193,6 +202,6 @@
             </div>
         </article>
     </section>
-    <div class="game-over">Game Over</div>
+    <div class="game-over">Times Up</div>
 </body>
 </html>
